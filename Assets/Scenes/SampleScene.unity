@@ -190,7 +190,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.059313316, g: 0.05500177, b: 0.11320752, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.96, y: 2.24, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1325908809}
   - component: {fileID: 1325908812}
   - component: {fileID: 1325908811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,13 +423,13 @@ MonoBehaviour:
   facing: 0
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   phaseLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 448
   itemLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!212 &1365421859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1971,7 +1971,7 @@ GameObject:
   - component: {fileID: 2077850291}
   - component: {fileID: 2077850293}
   - component: {fileID: 2077850292}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Items/Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
