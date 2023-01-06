@@ -28,13 +28,23 @@ public class Player : MonoBehaviour {
     void Update() {
         int moveDirection = -1; // 0 = up, 1 = right, 2 = down, 3 = left
         if (Input.GetKeyDown(KeyCode.Z)) { // toggle phase mode
-            if(!usingItem /*&& phaseAvailable*/) 
+            if(!usingItem /*&& phaseAvailable*/) {
                 phasing = !phasing;
+            } else {
+                Debug.Log("Player cannot phase while using an item");
+            }
             // else play a "wrong" sound and give some kind of feedback
         } else if (Input.GetKeyDown(KeyCode.X)) { // toggle item mode
-            if(!phasing && item != 0)
+            if(!phasing && item != 0) {
                 UseItem();
-            // else play a "wrong" sound and give some kind of feedback
+            } else {
+                if (item == 0) {
+                    Debug.Log("Player cannot use an item if they have none");
+                } else if (phasing) {
+                    Debug.Log("Player cannot use an item while phasing");
+                }
+            }
+            
         } else if (Input.GetKeyDown(KeyCode.UpArrow)) { // check for arrow keys to move
             moveDirection = 0;
         } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
@@ -78,10 +88,14 @@ public class Player : MonoBehaviour {
 
         if (col != null) {
             // play invalid action sound
+            Debug.Log("Player cannot move to new position due to obstacle at destination");
             return;
         }
 
         transform.position = new Vector3(posUpdate.x + currentPos.x, posUpdate.y + currentPos.y, 0f); // temporary, will do in a proper coroutine later
+
+        Debug.Log("Player Moved");
+        SceneController.Tick();
     }
 
     public void PhaseMove(int moveDirection) {
@@ -113,6 +127,7 @@ public class Player : MonoBehaviour {
             IObstacle phaseObj = phaseCol.GetComponent<IObstacle>();
             if (phaseObj != null) {
                 if (!phaseObj.IsPhasable()) { // if object isn't phasable
+                    Debug.Log("Player cannot phase through object");
                     // play invalid phase sound/relevant animation to show you can't phase through the thing
                     return;
                 }
@@ -122,18 +137,24 @@ public class Player : MonoBehaviour {
         Collider2D destCol = Physics2D.OverlapPoint(new Vector2(posUpdate.x + currentPos.x, posUpdate.y + currentPos.y), obstacleLayerMask);
         if (destCol != null) {
             // play invalid action sound
+            Debug.Log("Player cannot move to new position due to obstacle at destination");
             return;
         }
 
         phasing = false;
         transform.position = new Vector3(posUpdate.x + currentPos.x, posUpdate.y + currentPos.y, 0f); // temporary, will do in a proper coroutine later
+
+        Debug.Log("Player Phased");
+        SceneController.Tick();
     }
 
     public void UseItem() {
         // TO DO
+        Debug.Log("Player should use item here");
     }
 
     public void KillPlayer() {
         // play death animation and reload level
+        Debug.Log("Player should die here");
     }
 }

@@ -7,5 +7,5 @@ public interface IObstacle {
     int type {get;} // type key: 0 = wall, 1 = door, 2 = enemy, 3 = prop
 
     bool IsPhasable();
-    int GetType();
+    int GetObsType();
 }
