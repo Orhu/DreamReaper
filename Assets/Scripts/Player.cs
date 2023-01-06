@@ -127,6 +127,7 @@ public class Player : MonoBehaviour {
             IObstacle phaseObj = phaseCol.GetComponent<IObstacle>();
             if (phaseObj != null) {
                 if (!phaseObj.IsPhasable()) { // if object isn't phasable
+                    phasing = false;
                     Debug.Log("Player cannot phase through object");
                     // play invalid phase sound/relevant animation to show you can't phase through the thing
                     return;
@@ -137,7 +138,9 @@ public class Player : MonoBehaviour {
         Collider2D destCol = Physics2D.OverlapPoint(new Vector2(posUpdate.x + currentPos.x, posUpdate.y + currentPos.y), obstacleLayerMask);
         if (destCol != null) {
             // play invalid action sound
-            Debug.Log("Player cannot move to new position due to obstacle at destination");
+            Debug.Log("Player cannot move to new position due to obstacle at destination, trying to move to next square instead");
+            PlayerMove(moveDirection);
+            phasing = false;
             return;
         }
 
