@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void Tick() { // each time the player takes an action
-        if (freezeTimer > 0) {
+        if (freezeTimer > 0 || enemyCount == 0) {
             freezeTimer--;
             _player.GetComponent<Player>().canAct = true;
         } else {
