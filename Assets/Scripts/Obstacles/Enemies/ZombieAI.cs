@@ -125,6 +125,6 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     private IEnumerator DeathOfPlayer(){
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneController.RestartLevel();
     }
 }

@@ -50,11 +50,11 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void RestartLevel() {
-        // load this scene again SceneManager.LoadScene();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public static void ClearLevel() {
-        // load next scene SceneManager.LoadScene();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
     public static void EnemyMoveDone() {
