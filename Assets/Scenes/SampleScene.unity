@@ -404,6 +404,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1798366538}
     - target: {fileID: 5427968822606923067, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427968822606923067, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427968822606923067, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
@@ -1488,7 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4578c5d87745b24aa131bf5e8d4834b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemNum: 0
+  itemNum: 1
 --- !u!1 &1701315173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,7 +1621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4578c5d87745b24aa131bf5e8d4834b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemNum: 1
+  itemNum: 3
 --- !u!212 &1798366538 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7488731554822254172, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
