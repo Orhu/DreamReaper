@@ -16,15 +16,20 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
     [SerializeField] int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
     [SerializeField] SpriteRenderer watcherLight;
     
+    public float originalY;
 
     private static float ls = 3f;
     
     private Vector2 verticalHit = new Vector2(.64f, ls);
     private Vector2 horizontHit = new Vector2(ls, .64f);
 
+    private GameObject spriteChild;
+
     // Start is called before the first frame update
     void Start()
     {
+        spriteChild = this.transform.GetChild(0).gameObject;
+        originalY = spriteChild.transform.position.y;
         hitbox = GetComponent<BoxCollider2D>();
         switch (facing) {
             case 0:
@@ -53,6 +58,9 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
     // Update is called once per frame
     void Update()
     {   
+        Vector2 floatY = spriteChild.transform.position;                    //bobbing motion
+        floatY.y = originalY + (Mathf.Sin(Time.time) * .2f);
+        spriteChild.transform.position = floatY;
     }
 
     public void OnTick(){
