@@ -175,6 +175,35 @@ public class Player : MonoBehaviour {
     public void UseItem() {
         // TO DO
         Debug.Log("Player should use item here");
+
+        switch (item) {
+            case 1: // key
+                UseKey();
+                return;
+            case 2: // scythe
+                UseScythe();
+                return;
+            case 3:
+                UseHourglass();
+                return;
+            default:
+                Debug.Log($"No item to use or invalid item num: {item}");
+                return;
+        }
+    }
+
+    private void UseKey() {
+        // TO DO
+    }
+
+    private void UseScythe() {
+        // TO DO
+    }
+
+    private void UseHourglass() {
+        Debug.Log("Freezing Time for 3 turns");
+        item = 0;
+        SceneController.ActivateFreeze();
     }
 
     public void KillPlayer() {
