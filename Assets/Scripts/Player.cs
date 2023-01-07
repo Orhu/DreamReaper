@@ -172,6 +172,7 @@ public class Player : MonoBehaviour {
                 Destroy(it.gameObject);
 
                 Debug.Log($"Player picked up item: {item}");
+                SceneController._ui.RefreshUI();
             }
         }
 
@@ -225,6 +226,7 @@ public class Player : MonoBehaviour {
                 Debug.Log("Unlocking door with key");
                 hitdoor.Unblock();
                 item = 0;
+                SceneController._ui.RefreshUI();
             }
         }
         // else, play animation
@@ -260,6 +262,7 @@ public class Player : MonoBehaviour {
             Debug.Log("Attempting to kill enemy");
             hitEnemy.Kill();
             item = 0;
+            SceneController._ui.RefreshUI();
         }
         // else, play animation
         // tick forward
@@ -270,6 +273,7 @@ public class Player : MonoBehaviour {
         Debug.Log("Freezing Time for 3 turns");
         item = 0;
         SceneController.ActivateFreeze();
+        SceneController._ui.RefreshUI();
     }
 
     public void KillPlayer() {

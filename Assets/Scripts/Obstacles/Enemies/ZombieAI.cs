@@ -42,13 +42,15 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     // Update is called once per frame
     void Update() {
-        if (!playerCaught) {
+        if (!playerCaught && gameObject.activeSelf) {
             CheckForPlayer();
         }
     }
 
     public void OnTick() {
-        ZombieMove();
+        if (gameObject.activeSelf) {
+            ZombieMove();
+        }
     }
 
     private bool CheckForPlayer() {
@@ -85,6 +87,6 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     public void Kill() {
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }

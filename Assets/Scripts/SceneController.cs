@@ -10,11 +10,14 @@ public class SceneController : MonoBehaviour {
     private static WatcherAI[] Watchers;
 
     public static GameObject _player;
+    public static UIController _ui;
 
     private static int freezeTimer = 0;
 
+
     void Start(){
         _player = GameObject.Find("Player");
+        _ui = GameObject.Find("UI").GetComponent<UIController>();
         freezeTimer = 0;
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
