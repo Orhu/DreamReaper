@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick {
+public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
     public bool phasable {get; private set;} = false;
     public int type {get; private set;} = 2; // type key: 0 = wall, 1 = door, 2 = enemy, 3 = prop
 
@@ -35,7 +35,6 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick {
 
     // Update is called once per frame
     void Update() {
-        OnTick();
     }
 
     public void OnTick() {
