@@ -460,6 +460,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7006459359246731995, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8735842982755890624, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -504,14 +508,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8735842982755890626, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8735842982755890626, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8735842982755890628, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
       propertyPath: m_Name
       value: zombie
@@ -526,6 +522,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735842982755890629, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
       propertyPath: PlayerMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8735842982755890629, guid: 8feddaa27f78f99449c7b90367d691cd, type: 3}
+      propertyPath: playerMask.m_Bits
       value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -685,7 +685,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
