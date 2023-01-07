@@ -100,6 +100,7 @@ public class Player : MonoBehaviour {
         transform.position = new Vector3(posUpdate.x + currentPos.x, posUpdate.y + currentPos.y, 0f); // temporary, will do in a proper coroutine later
 
         Debug.Log("Player Moved");
+        CheckItem();
         SceneController.Tick();
     }
 
@@ -153,7 +154,22 @@ public class Player : MonoBehaviour {
         transform.position = new Vector3(posUpdate.x + currentPos.x, posUpdate.y + currentPos.y, 0f); // temporary, will do in a proper coroutine later
 
         Debug.Log("Player Phased");
+        CheckItem();
         SceneController.Tick();
+    }
+
+    public void CheckItem() {
+        Collider2D itemCol = Physics2D.OverlapPoint(transform.position, itemLayerMask);
+        if (itemCol != null) {
+            Item it = itemCol.GetComponent<Item>();
+            if (it != null) {
+                item = it.PickupItem();
+                Destroy(it.gameObject);
+
+                Debug.Log($"Player picked up item: {item}");
+            }
+        }
+
     }
 
     public void UseItem() {

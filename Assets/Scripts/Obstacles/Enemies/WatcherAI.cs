@@ -14,7 +14,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
     private BoxCollider2D hitbox;
 
     [SerializeField] int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
-    [SerializeField] SpriteRenderer light;
+    [SerializeField] SpriteRenderer watcherLight;
     
 
     private static float ls = 3f;
@@ -30,22 +30,22 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
             case 0:
                 vertical = 1f;
                 horizontal = 0f;
-                light.size = verticalHit;
+                watcherLight.size = verticalHit;
                 break;
             case 1: 
                 vertical = 0f;
                 horizontal = 1f;
-                light.size = horizontHit;
+                watcherLight.size = horizontHit;
                 break;
             case 2:
                 vertical = -1f;
                 horizontal = 0f;
-                light.size = verticalHit;
+                watcherLight.size = verticalHit;
                 break;
             case 3:
                 vertical = 0f;
                 horizontal = -1f;
-                light.size = horizontHit;
+                watcherLight.size = horizontHit;
                 break;
         }
     }
@@ -82,8 +82,8 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
                 hitbox.size = verticalHit;
                 break;
         }
-        light.transform.Rotate(Vector3.back * 90);
-        light.transform.localPosition = new Vector2(horizontal, vertical);
+        watcherLight.transform.Rotate(Vector3.back * 90);
+        watcherLight.transform.localPosition = new Vector2(horizontal, vertical);
         hitbox.offset = new Vector2(horizontal, vertical);
     }
 
