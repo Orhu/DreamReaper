@@ -95,6 +95,8 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     public void Kill() {
         gameObject.SetActive(false);
+        SceneController.DecreaseEnemyCount();
+        StopAllCoroutines();
     }
 
     // Animation stuff
