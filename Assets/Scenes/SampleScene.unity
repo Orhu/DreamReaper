@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6cddf5254b4a7746ac26681f1e0d94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocked: 0
+  blocked: 1
 --- !u!61 &1325908812
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -731,6 +731,12 @@ MonoBehaviour:
   itemLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  doorLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!212 &1365421859
 SpriteRenderer:
   m_ObjectHideFlags: 0

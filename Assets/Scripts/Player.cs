@@ -16,12 +16,17 @@ public class Player : MonoBehaviour {
     [SerializeField] LayerMask phaseLayerMask;
     [Tooltip("Layers to check for item usages")]
     [SerializeField] LayerMask itemLayerMask;
+    [Tooltip("Layers to check for enemies only")]
+    [SerializeField] LayerMask enemyLayerMask;
+    [Tooltip("Layers to check for doors only")]
+    [SerializeField] LayerMask doorLayerMask;
 
     private Animator _anim;
 
     // Start is called before the first frame update
     void Start() {
         _anim = GetComponent<Animator>();
+        _anim.SetInteger("facing", facing);
     }
 
     // Update is called once per frame
@@ -183,7 +188,7 @@ public class Player : MonoBehaviour {
             case 2: // scythe
                 UseScythe();
                 return;
-            case 3:
+            case 3: // hourglass
                 UseHourglass();
                 return;
             default:
@@ -194,10 +199,71 @@ public class Player : MonoBehaviour {
 
     private void UseKey() {
         // TO DO
+        // check if thing in front of player is a locked door
+        Debug.Log("Use key");
+        Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 frontPos = new Vector2(0f,0f);
+        switch (facing) {
+            case 0:
+                frontPos = new Vector2(curPos.x, curPos.y + 0.64f);
+                break;
+            case 1:
+                frontPos = new Vector2(curPos.x + 0.64f, curPos.y);
+                break;
+            case 2:
+                frontPos = new Vector2(curPos.x, curPos.y - 0.64f);
+                break;
+            case 3:
+                frontPos = new Vector2(curPos.x - 0.64f, curPos.y);
+                break;
+        }
+        Collider2D frontCol = Physics2D.OverlapPoint(frontPos, doorLayerMask);
+        // if door, unlock door and remove item
+        if (frontCol != null) {
+            Door hitdoor = frontCol.GetComponent<Door>();
+            if (hitdoor.IsBlocked()) {
+                Debug.Log("Unlocking door with key");
+                hitdoor.Unblock();
+                item = 0;
+            }
+        }
+        // else, play animation
+        //tick forward
+        SceneController.Tick();
     }
 
     private void UseScythe() {
         // TO DO
+        // Check if thing in front of player is an enemy
+        // find front
+        Debug.Log("Use scythe");
+        Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 frontPos = new Vector2(0f,0f);
+        switch (facing) {
+            case 0:
+                frontPos = new Vector2(curPos.x, curPos.y + 0.64f);
+                break;
+            case 1:
+                frontPos = new Vector2(curPos.x + 0.64f, curPos.y);
+                break;
+            case 2:
+                frontPos = new Vector2(curPos.x, curPos.y - 0.64f);
+                break;
+            case 3:
+                frontPos = new Vector2(curPos.x - 0.64f, curPos.y);
+                break;
+        }
+        Collider2D frontCol = Physics2D.OverlapPoint(frontPos, enemyLayerMask);
+        // if enemy, kill and remove item
+        if (frontCol != null) {
+            IEnemy hitEnemy = frontCol.GetComponent<IEnemy>();
+            Debug.Log("Attempting to kill enemy");
+            hitEnemy.Kill();
+            item = 0;
+        }
+        // else, play animation
+        // tick forward
+        SceneController.Tick();
     }
 
     private void UseHourglass() {
