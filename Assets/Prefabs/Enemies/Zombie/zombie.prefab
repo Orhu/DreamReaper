@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8735842982755890627}
   - component: {fileID: 8735842982755890626}
   - component: {fileID: 8735842982755890629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,5 +112,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2c03d3906c2784dbd9e58e881b95b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal: 0
-  vertical: 1
+  facing: 0
