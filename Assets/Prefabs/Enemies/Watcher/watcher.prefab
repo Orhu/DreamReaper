@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3423892108844157770}
   - component: {fileID: 7488731554822254172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5427968822606923068}
   - component: {fileID: 5427968822606923067}
   - component: {fileID: 5427968822606923066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: watcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
