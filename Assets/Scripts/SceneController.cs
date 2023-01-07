@@ -20,6 +20,8 @@ public class SceneController : MonoBehaviour {
 
     private static bool playerCaught = false;
 
+    public static bool allowKills = false;
+
 
     void Start(){
         _player = GameObject.Find("Player");
@@ -34,6 +36,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void Tick() { // each time the player takes an action
+        allowKills = true;
         if (playerCaught) {
             return;
         }
@@ -76,6 +79,7 @@ public class SceneController : MonoBehaviour {
         if (enemiesDone == enemyCount) {
             _player.GetComponent<Player>().canAct = true;
             enemiesDone = 0;
+            allowKills = false;
         }
     }
 
