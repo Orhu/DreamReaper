@@ -5,32 +5,70 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
     [SerializeField] Image itemBox;
-    [SerializeField] Sprite[] itemSprites;
+
+    [Header("Animation Frames")]
+    [SerializeField] Sprite[] keyAnimationFrames;
+    [SerializeField] Sprite[] scytheAnimationFrames;
+    [SerializeField] Sprite[] hourglassAnimationFrames;
+    [SerializeField] int animLength = 3;
+
+    [SerializeField] float animationSpeed = 0.5f; // time for each frame
+
+    private float timeRemaining;
+    private int frame = 0;
 
     private int curSprite = 0;
-    private bool itemActive = false;
     
     void Start() {
-        UpdateSprite();
+        curSprite = 0;
+        frame = 0;
+        timeRemaining = animationSpeed;
+        itemBox.gameObject.SetActive(false);
+    }
+
+    void Update() {
+        if (curSprite != 0) {
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining <= 0f) {
+                frame += 1;
+                if (frame >= animLength) {
+                    frame = 0;
+                }
+                switch (curSprite) {
+                    case 1:
+                        itemBox.sprite = keyAnimationFrames[frame];
+                        break;
+                    case 2:
+                        itemBox.sprite = scytheAnimationFrames[frame];
+                        break;
+                    case 3:
+                        itemBox.sprite = hourglassAnimationFrames[frame];
+                        break;
+                }
+                timeRemaining = animationSpeed;
+            }
+        }
     }
 
     public void ChangeItemSprite(int newSprite) {
         curSprite = newSprite;
-        UpdateSprite();
-    }
-
-    public void ToggleItemActive() {
-        if (itemActive) {
-            curSprite = curSprite + 3;
+        frame = 0;
+        if (curSprite == 0) {
+            itemBox.gameObject.SetActive(false);
         } else {
-            curSprite = curSprite - 3;
+            switch (curSprite) {
+                case 1:
+                    itemBox.sprite = keyAnimationFrames[frame];
+                    break;
+                case 2:
+                    itemBox.sprite = scytheAnimationFrames[frame];
+                    break;
+                case 3:
+                    itemBox.sprite = hourglassAnimationFrames[frame];
+                    break;
+            }
+            itemBox.gameObject.SetActive(true);
         }
-        itemActive = !itemActive;
-        UpdateSprite();
-    }
-
-    private void UpdateSprite() {
-        itemBox.sprite = itemSprites[curSprite];
     }
 
     public void RefreshUI() {

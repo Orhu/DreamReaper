@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour {
 
     public static GameObject _player;
     public static UIController _ui;
+    public static AudioSource _audioSource;
 
     private static int freezeTimer = 0;
 
@@ -18,6 +19,7 @@ public class SceneController : MonoBehaviour {
     void Start(){
         _player = GameObject.Find("Player");
         _ui = GameObject.Find("UI").GetComponent<UIController>();
+        _audioSource = GetComponent<AudioSource>();
         freezeTimer = 0;
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
