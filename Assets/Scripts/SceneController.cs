@@ -11,20 +11,31 @@ public class SceneController : MonoBehaviour {
 
     public static GameObject _player;
 
+    private static int freezeTimer = 0;
+
     void Start(){
         _player = GameObject.Find("Player");
+        freezeTimer = 0;
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
     }
 
     public static void Tick() { // each time the player takes an action
-        foreach (ZombieAI zombie in Zombies){
-            zombie.OnTick();
+        if (freezeTimer > 0) {
+            freezeTimer--;
+        } else {
+            foreach (ZombieAI zombie in Zombies){
+                zombie.OnTick();
+            }
+            foreach (WatcherAI watcher in Watchers){
+                watcher.OnTick();
+            }
+            // call OnTick() on every game object in the scene
         }
-        foreach (WatcherAI watcher in Watchers){
-            watcher.OnTick();
-        }
-        // call OnTick() on every game object in the scene
+    }
+
+    public static void ActivateFreeze() {
+        freezeTimer = 3;
     }
 
     public static void RestartLevel() {
