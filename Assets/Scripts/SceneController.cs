@@ -64,5 +64,9 @@ public class SceneController : MonoBehaviour {
             enemiesDone = 0;
         }
     }
+
+    public static void DecreaseEnemyCount() {
+        enemyCount--;
+    }
 }
 
