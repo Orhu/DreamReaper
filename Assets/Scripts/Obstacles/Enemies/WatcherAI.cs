@@ -78,7 +78,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     // Update is called once per frame
     void Update() {   
         AnimateIdle();
-        if (!playerCaught && gameObject.activeSelf) {
+        if (!playerCaught && gameObject.activeSelf && SceneController.allowKills) {
             if (CheckForPlayer()){
                 StopAllCoroutines();
                 StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
