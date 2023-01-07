@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Reaper_right
+  m_Name: Reaper_phase_up
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 674071601, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+      value: {fileID: 241271920, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
     - time: 0.083333336
-      value: {fileID: -64019711, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+      value: {fileID: -473547515, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
     - time: 0.16666667
-      value: {fileID: 363824837, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+      value: {fileID: 1054263071, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
     - time: 0.25
-      value: {fileID: -1276476702, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+      value: {fileID: 614866016, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 674071601, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
-    - {fileID: -64019711, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
-    - {fileID: 363824837, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
-    - {fileID: -1276476702, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+    - {fileID: 241271920, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+    - {fileID: -473547515, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+    - {fileID: 1054263071, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
+    - {fileID: 614866016, guid: e5a288f265a4f9c45b65fee7b5c0e561, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -58,7 +58,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     void Update() {   
         Vector2 floatY = spriteChild.transform.position;                    //bobbing motion
         floatY.y = originalY + (Mathf.Sin(Time.time) * .05f);
-        spriteChild.transform.position = floatY;
+        spriteChild.transform.position = new Vector3(floatY.x, floatY.y, transform.position.z);
     }
 
     public void OnTick() {
@@ -90,7 +90,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                     break;
             }
             watcherLight.transform.Rotate(Vector3.back * 90);
-            watcherLight.transform.localPosition = new Vector2(horizontal * 1.4f, vertical * 1.4f);
+            watcherLight.transform.localPosition = new Vector3(horizontal * 1.4f, vertical * 1.4f, transform.localPosition.z);
             hitbox.offset = new Vector2(horizontal, vertical);
         }
     }

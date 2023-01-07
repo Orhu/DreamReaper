@@ -63,8 +63,8 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     private void ZombieMove() {
-        Vector2 currentCoord = transform.position;
-        Vector2 nextCoord = new Vector2(currentCoord.x + .64f * horizontal, currentCoord.y + .64f * vertical);
+        Vector3 currentCoord = transform.position;
+        Vector2 nextCoord = new Vector3(currentCoord.x + .64f * horizontal, currentCoord.y + .64f * vertical);
 
         Debug.Log(currentCoord);
         Debug.Log(nextCoord);
@@ -76,7 +76,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
             nextCoord.x = currentCoord.x + .64f*horizontal;
             nextCoord.y = currentCoord.y + .64f*vertical;
         }
-        transform.position = nextCoord;
+        transform.position = new Vector3(nextCoord.x, nextCoord.y, transform.position.z);
     }
      
     public bool IsPhasable() {

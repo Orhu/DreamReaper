@@ -45,7 +45,7 @@ public class SceneController : MonoBehaviour {
         // load this scene again SceneManager.LoadScene();
     }
 
-    public static void WinLevel() {
+    public static void ClearLevel() {
         // load next scene SceneManager.LoadScene();
     }
 }
