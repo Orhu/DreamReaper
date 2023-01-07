@@ -208,7 +208,12 @@ public class Player : MonoBehaviour {
             }
             Item it = itemCol.GetComponent<Item>();
             if (it != null) {
-                item = it.PickupItem();
+                int hold = it.PickupItem();
+                if (hold == 4) { // if phase restore
+                    RestorePhases(1);
+                } else {
+                    item = hold;
+                }
                 Destroy(it.gameObject);
 
                 Debug.Log($"Player picked up item: {item}");
@@ -314,6 +319,13 @@ public class Player : MonoBehaviour {
         item = 0;
         SceneController.ActivateFreeze();
         SceneController._ui.RefreshUI();
+    }
+
+    private void RestorePhases(int numRest) {
+        curPhases += numRest;
+        if (curPhases > maxPhases) {
+            curPhases = maxPhases;
+        }
     }
 
     public void KillPlayer() {
