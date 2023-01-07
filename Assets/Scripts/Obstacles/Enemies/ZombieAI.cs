@@ -7,6 +7,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
     public int type {get; private set;} = 2; // type key: 0 = wall, 1 = door, 2 = enemy, 3 = prop
 
     [SerializeField] int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
+    [SerializeField] LayerMask PlayerMask;
 
     private float horizontal = 0f;
     private float vertical = 0f;
@@ -38,22 +39,46 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
     }
 
     public void OnTick() {
+        
         Vector2 currentCoord = transform.position;
         Vector2 nextCoord;
+        
         nextCoord.x = currentCoord.x + .64f*horizontal;
         nextCoord.y = currentCoord.y + .64f*vertical;
+
+        Collider2D playerCheck = Physics2D.OverlapPoint(currentCoord, PlayerMask);
+        if (playerCheck != null){
+            Player pl = playerCheck.GetComponent<Player>();
+            if (pl != null) {
+                Debug.Log("player is dead");
+                transform.position = nextCoord;
+            }
+        }
 
         Debug.Log(nextCoord);
         Debug.Log(currentCoord);
 
-
         Collider2D overlapCheck = Physics2D.OverlapPoint(nextCoord);
         if (overlapCheck != null){
-            horizontal = -horizontal;
-            vertical = -vertical;
+            Player pl = overlapCheck.GetComponent<Player>();
+            if (pl != null) {
+                transform.position = nextCoord;
+            }
+            else{
+                horizontal = -horizontal;
+                vertical = -vertical;
+            }
         }
         else{
             transform.position = nextCoord;
+            playerCheck = Physics2D.OverlapPoint(currentCoord, PlayerMask);
+            if (playerCheck != null){
+                Player pl = playerCheck.GetComponent<Player>();
+                if (pl != null) {
+                    Debug.Log("player is dead");
+                    transform.position = nextCoord;
+                }
+            }
         }
 
     }

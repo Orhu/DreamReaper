@@ -210,4 +210,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facing: 0
-  light: {fileID: 7488731554822254172}
+  watcherLight: {fileID: 7488731554822254172}

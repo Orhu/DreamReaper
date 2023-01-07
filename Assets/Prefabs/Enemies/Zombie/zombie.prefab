@@ -113,3 +113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facing: 0
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 8
