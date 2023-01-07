@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
@@ -78,8 +79,12 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     void Update() {   
         AnimateIdle();
 
+        bool check = false;
         if (!playerCaught && gameObject.activeSelf) {
-            CheckForPlayer();
+            check = CheckForPlayer();
+            if (check == true){
+                StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+            }
         }
     }
 
@@ -215,6 +220,11 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
 
         // 4) send done message to SceneController
         SceneController.EnemyMoveDone();
+    }
+
+    private IEnumerator DeathOfPlayer(){
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 

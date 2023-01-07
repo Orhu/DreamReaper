@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
@@ -45,8 +46,13 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     // Update is called once per frame
     void Update() {
+
+        bool check = false;
         if (!playerCaught && gameObject.activeSelf) {
-            CheckForPlayer();
+            check = CheckForPlayer();
+            if (check == true){
+                StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+            }
         }
     }
 
@@ -115,5 +121,10 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
         transform.position = new Vector3(dest.x, dest.y, 0f);
         SceneController.EnemyMoveDone();
+    }
+
+    private IEnumerator DeathOfPlayer(){
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
