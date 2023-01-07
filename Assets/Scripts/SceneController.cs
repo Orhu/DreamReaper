@@ -18,6 +18,8 @@ public class SceneController : MonoBehaviour {
     private static int enemyCount;
     private static int enemiesDone;
 
+    private static bool playerCaught = false;
+
 
     void Start(){
         _player = GameObject.Find("Player");
@@ -28,9 +30,13 @@ public class SceneController : MonoBehaviour {
         Watchers = FindObjectsOfType<WatcherAI>();
 
         enemyCount = Zombies.Length + Watchers.Length;
+        playerCaught = false;
     }
 
     public static void Tick() { // each time the player takes an action
+        if (playerCaught) {
+            return;
+        }
         if (freezeTimer > 0 || enemyCount == 0) {
             freezeTimer--;
             _player.GetComponent<Player>().canAct = true;
@@ -47,6 +53,14 @@ public class SceneController : MonoBehaviour {
 
     public static void ActivateFreeze() {
         freezeTimer = 3;
+    }
+
+    public static void PlayerRestartLevel() {
+
+    }
+
+    public static void PlayerCaught() {
+        playerCaught = true;
     }
 
     public static void RestartLevel() {

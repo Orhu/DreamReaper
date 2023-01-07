@@ -46,11 +46,9 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     // Update is called once per frame
     void Update() {
-
-        bool check = false;
         if (!playerCaught && gameObject.activeSelf) {
-            check = CheckForPlayer();
-            if (check == true){
+            if (CheckForPlayer()){
+                StopAllCoroutines();
                 StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
             }
         }
@@ -124,6 +122,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     private IEnumerator DeathOfPlayer(){
+        SceneController.PlayerCaught();
         yield return new WaitForSeconds(1f);
         SceneController.RestartLevel();
     }

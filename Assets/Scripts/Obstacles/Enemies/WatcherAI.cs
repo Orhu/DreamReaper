@@ -78,11 +78,9 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     // Update is called once per frame
     void Update() {   
         AnimateIdle();
-
-        bool check = false;
         if (!playerCaught && gameObject.activeSelf) {
-            check = CheckForPlayer();
-            if (check == true){
+            if (CheckForPlayer()){
+                StopAllCoroutines();
                 StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
             }
         }
@@ -214,7 +212,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         }
         lightObject.transform.Rotate(Vector3.back * 90);
         lightObject.transform.localPosition = new Vector3(horizontal * 0.88f, vertical * 0.88f, transform.localPosition.z);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         // 3) reveal light bar
         lightObject.SetActive(true);
 
@@ -223,6 +221,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     private IEnumerator DeathOfPlayer(){
+        SceneController.PlayerCaught();
         yield return new WaitForSeconds(1f);
         SceneController.RestartLevel();
     }
