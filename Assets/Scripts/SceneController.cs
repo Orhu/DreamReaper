@@ -9,7 +9,10 @@ public class SceneController : MonoBehaviour {
     private static ZombieAI[] Zombies;
     private static WatcherAI[] Watchers;
 
+    public static GameObject _player;
+
     void Start(){
+        _player = GameObject.Find("Player");
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
     }
