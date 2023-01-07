@@ -63,7 +63,10 @@ public class Player : MonoBehaviour {
                         Debug.Log("Player cannot use an item while phasing");
                     }
                 }
-                
+            } else if (Input.GetKeyDown(KeyCode.C)) {// wait
+                Debug.Log("Waiting a turn");
+                canAct = false;
+                SceneController.Tick();
             } else if (Input.GetKeyDown(KeyCode.UpArrow)) { // check for arrow keys to move
                 moveDirection = 0;
                 facing = 0;
@@ -76,6 +79,8 @@ public class Player : MonoBehaviour {
             } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                 moveDirection = 3;
                 facing = 3;
+            } else if (Input.GetKeyDown(KeyCode.Backspace)) {
+                // Restart Level Prompt
             }
 
             if (moveDirection != -1) {
