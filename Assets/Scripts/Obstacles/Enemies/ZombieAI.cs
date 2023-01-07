@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
+public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     public bool phasable {get; private set;} = false;
     public int type {get; private set;} = 2; // type key: 0 = wall, 1 = door, 2 = enemy, 3 = prop
 
@@ -42,13 +42,15 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
 
     // Update is called once per frame
     void Update() {
-        if (!playerCaught) {
+        if (!playerCaught && gameObject.activeSelf) {
             CheckForPlayer();
         }
     }
 
     public void OnTick() {
-        ZombieMove();
+        if (gameObject.activeSelf) {
+            ZombieMove();
+        }
     }
 
     private bool CheckForPlayer() {
@@ -61,8 +63,8 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
     }
 
     private void ZombieMove() {
-        Vector2 currentCoord = transform.position;
-        Vector2 nextCoord = new Vector2(currentCoord.x + .64f * horizontal, currentCoord.y + .64f * vertical);
+        Vector3 currentCoord = transform.position;
+        Vector2 nextCoord = new Vector3(currentCoord.x + .64f * horizontal, currentCoord.y + .64f * vertical);
 
         Debug.Log(currentCoord);
         Debug.Log(nextCoord);
@@ -74,7 +76,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
             nextCoord.x = currentCoord.x + .64f*horizontal;
             nextCoord.y = currentCoord.y + .64f*vertical;
         }
-        transform.position = nextCoord;
+        transform.position = new Vector3(nextCoord.x, nextCoord.y, transform.position.z);
     }
      
     public bool IsPhasable() {
@@ -82,5 +84,9 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
     }
     public int GetObsType() {
         return type;
+    }
+
+    public void Kill() {
+        gameObject.SetActive(false);
     }
 }
