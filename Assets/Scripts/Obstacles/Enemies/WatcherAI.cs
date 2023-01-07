@@ -59,7 +59,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
     void Update()
     {   
         Vector2 floatY = spriteChild.transform.position;                    //bobbing motion
-        floatY.y = originalY + (Mathf.Sin(Time.time) * .2f);
+        floatY.y = originalY + (Mathf.Sin(Time.time) * .05f);
         spriteChild.transform.position = floatY;
     }
 
