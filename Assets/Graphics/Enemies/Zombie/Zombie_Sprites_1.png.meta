@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed61af75d539df34ab6d37405b8f9bca
+guid: 66b821f605965824f8ff8d5cd15217bc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: watcher_down0
+      name: zombie_left0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,20 +124,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beadb4c2c76132b4d847ec8fd030a4ce
-      internalID: -1028529217
+      spriteID: b28b78e447401bd48bad42cbb3cbdd99
+      internalID: -967581888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_down1
+      name: zombie_left1
       rect:
         serializedVersion: 2
         x: 64
@@ -145,20 +145,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 992343864d1616a45a306f5c417c96c8
-      internalID: 1329976332
+      spriteID: bda60906af077034b8f7f9a7c9a024bf
+      internalID: 2111648190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_closed
+      name: zombie_left2
       rect:
         serializedVersion: 2
         x: 128
@@ -166,20 +166,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e0fa3d1979a43148adbbcf2760e8a9a
-      internalID: 1173306871
+      spriteID: ab584b9eb2c0dab4b96c3ca92eb89c1b
+      internalID: -2021044764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_left1
+      name: zombie_left3
       rect:
         serializedVersion: 2
         x: 192
@@ -187,20 +187,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 401f45739fc52a3409b2ed3762102870
-      internalID: 711981955
+      spriteID: 857632793fb506844931366a8b22190b
+      internalID: -1372276889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_left0
+      name: zombie_left4
       rect:
         serializedVersion: 2
         x: 256
@@ -208,98 +208,119 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de4eeacb84a41f845a0dc1c4bd3113cd
-      internalID: 567362579
+      spriteID: e65d8b65732bb5348a7ffe34d099076c
+      internalID: 2132284876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_right1
+      name: zombie_right0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1c129b74fe6ea44abc02bd3f8b8e02f
-      internalID: -266976738
+      spriteID: af0716b545c73224383b99f51d5473e3
+      internalID: 1601883160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_right0
+      name: zombie_right1
       rect:
         serializedVersion: 2
-        x: 65
+        x: 64
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80002a043d138cd4faaebf7690fbe3a1
-      internalID: 1939354393
+      spriteID: 24c051919974e744f920ce7a79470b04
+      internalID: 436288783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_up0
+      name: zombie_right2
       rect:
         serializedVersion: 2
-        x: 129
+        x: 128
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d75370e7364051949808a13da3b7f0c8
-      internalID: -251432955
+      spriteID: fafb0d219d0e36b4bb4e8e9795b47b39
+      internalID: 1851954924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: watcher_up1
+      name: zombie_right3
       rect:
         serializedVersion: 2
-        x: 193
+        x: 192
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcc5dabd901926840bbf742b4fd8f20c
-      internalID: -1178097070
+      spriteID: 60b3a4e50eb7e264bbd99328996265f3
+      internalID: 1820813456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_right4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 284129f3d55729d4eb5ae617d01c5cf5
+      internalID: -990703764
       vertices: []
       indices: 
       edges: []
@@ -315,16 +336,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      watcher_up0: -251432955
-      watcher_left0: 567362579
-      watcher_right0: 1939354393
-      Watcher_Sprite_1_9: 941505137
-      watcher_left1: 711981955
-      watcher_up1: -1178097070
-      watcher_down1: 1329976332
-      watcher_closed: 1173306871
-      watcher_down0: -1028529217
-      watcher_right1: -266976738
+      zombie_left2: -2021044764
+      zombie_left1: 2111648190
+      zombie_left0: -967581888
+      zombie_right0: 1601883160
+      zombie_right1: 436288783
+      zombie_left3: -1372276889
+      zombie_left4: 2132284876
+      zombie_right4: -990703764
+      zombie_right2: 1851954924
+      zombie_right3: 1820813456
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
