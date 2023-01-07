@@ -116,3 +116,6 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 8
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 448

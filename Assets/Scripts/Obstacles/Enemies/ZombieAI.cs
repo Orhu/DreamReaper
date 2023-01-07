@@ -8,6 +8,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
 
     [SerializeField] int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
     [SerializeField] LayerMask PlayerMask;
+    [SerializeField] LayerMask obstacleLayerMask;
 
     private float horizontal = 0f;
     private float vertical = 0f;
@@ -48,36 +49,29 @@ public class ZombieAI : MonoBehaviour, IObstacle, IUpdateOnTick  {
 
         Collider2D playerCheck = Physics2D.OverlapPoint(currentCoord, PlayerMask);
         if (playerCheck != null){
-            Player pl = playerCheck.GetComponent<Player>();
-            if (pl != null) {
-                Debug.Log("player is dead");
-                transform.position = nextCoord;
-            }
+            Debug.Log("player is dead");
         }
 
         Debug.Log(nextCoord);
         Debug.Log(currentCoord);
 
-        Collider2D overlapCheck = Physics2D.OverlapPoint(nextCoord);
+        Collider2D overlapCheck = Physics2D.OverlapPoint(nextCoord, obstacleLayerMask);
         if (overlapCheck != null){
-            Player pl = overlapCheck.GetComponent<Player>();
-            if (pl != null) {
-                transform.position = nextCoord;
-            }
-            else{
-                horizontal = -horizontal;
-                vertical = -vertical;
+            horizontal = -horizontal;
+            vertical = -vertical;
+            nextCoord.x = currentCoord.x + .64f*horizontal;
+            nextCoord.y = currentCoord.y + .64f*vertical;
+            transform.position = nextCoord;
+            playerCheck = Physics2D.OverlapPoint(nextCoord, PlayerMask); //this part is being weird, will only debug when 
+            if (playerCheck != null){
+                Debug.Log("player is dead 2");
             }
         }
         else{
             transform.position = nextCoord;
-            playerCheck = Physics2D.OverlapPoint(currentCoord, PlayerMask);
+            playerCheck = Physics2D.OverlapPoint(nextCoord, PlayerMask); //this part is being weird, will only debug when 
             if (playerCheck != null){
-                Player pl = playerCheck.GetComponent<Player>();
-                if (pl != null) {
-                    Debug.Log("player is dead");
-                    transform.position = nextCoord;
-                }
+                Debug.Log("player is dead 2");
             }
         }
 
