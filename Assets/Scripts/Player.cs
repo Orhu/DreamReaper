@@ -378,10 +378,11 @@ public class Player : MonoBehaviour {
                 i += 20f * Time.deltaTime; // 0.05s
                 yield return null;
             }
+            transform.position = new Vector3(start.x, start.y, 0f);
             yield return new WaitForSeconds(0.05f);
             _sprite.color = new Vector4(1f, 1f, 1f, 1f);
+            canAct = true;
         }
-        canAct = true;
     }
 
     private IEnumerator AnimatePhase(Vector2 dest, int phaseType) { 
@@ -489,6 +490,8 @@ public class Player : MonoBehaviour {
                 // need animation
                 yield return new WaitForSeconds(0.2f);
                 _sprite.color = new Vector4(1f, 1f, 1f, 1f);
+
+                canAct = true;
                 break;
             case 3: // fail, phase through blocked door
                 // 1) move 0.32px forward in 0.2s
@@ -534,10 +537,10 @@ public class Player : MonoBehaviour {
                 // need animation
                 yield return new WaitForSeconds(0.75f);
                 _sprite.color = new Vector4(1f, 1f, 1f, 1f);
+
+                canAct = true;
                 break;
         }
-        yield return null;
-        canAct = true;
     }
 
     private IEnumerator AnimateOutOfPhases() {

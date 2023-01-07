@@ -11,6 +11,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     [SerializeField] LayerMask obstacleLayerMask;
 
     private BoxCollider2D _box;
+    private Animator _anim;
 
     private float horizontal = 0f;
     private float vertical = 0f;
@@ -20,6 +21,8 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     // Start is called before the first frame update
     void Start() {
         _box = GetComponent<BoxCollider2D>();
+        _anim = GetComponent<Animator>();
+        _anim.SetInteger("facing", facing);
         switch (facing) {
             case 0:
                 vertical = 1f;
@@ -70,13 +73,17 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         Debug.Log(nextCoord);
 
         Collider2D overlapCheck = Physics2D.OverlapPoint(nextCoord, obstacleLayerMask);
-        if (overlapCheck != null) {
+        if (overlapCheck != null) { // need to change directions
+            facing = (facing + 2) % 4;
+            _anim.SetInteger("facing", facing);
             horizontal = -horizontal;
             vertical = -vertical;
             nextCoord.x = currentCoord.x + .64f*horizontal;
             nextCoord.y = currentCoord.y + .64f*vertical;
         }
-        transform.position = new Vector3(nextCoord.x, nextCoord.y, transform.position.z);
+        _anim.SetTrigger("tick");
+        Vector3 dest = new Vector3(nextCoord.x, nextCoord.y, transform.position.z);
+        StartCoroutine(AnimateZombieMove(dest));
     }
      
     public bool IsPhasable() {
@@ -88,5 +95,23 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     public void Kill() {
         gameObject.SetActive(false);
+    }
+
+    // Animation stuff
+    private IEnumerator AnimateZombieMove(Vector3 dest) {
+        // TO DO
+        Vector2 start = transform.position;
+
+        yield return new WaitForSeconds(1f/6f); // wait for start of animation
+
+        float i = 0f;
+        while (i < 1f) {
+            transform.position = new Vector3(Mathf.Lerp(start.x, dest.x, i), Mathf.Lerp(start.y, dest.y, i), 0f);
+            i += 6f * Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = new Vector3(dest.x, dest.y, 0f);
+        SceneController.EnemyMoveDone();
     }
 }

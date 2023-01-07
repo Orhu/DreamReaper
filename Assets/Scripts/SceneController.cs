@@ -15,6 +15,9 @@ public class SceneController : MonoBehaviour {
 
     private static int freezeTimer = 0;
 
+    private static int enemyCount;
+    private static int enemiesDone;
+
 
     void Start(){
         _player = GameObject.Find("Player");
@@ -23,11 +26,14 @@ public class SceneController : MonoBehaviour {
         freezeTimer = 0;
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
+
+        enemyCount = Zombies.Length + Watchers.Length;
     }
 
     public static void Tick() { // each time the player takes an action
         if (freezeTimer > 0) {
             freezeTimer--;
+            _player.GetComponent<Player>().canAct = true;
         } else {
             foreach (ZombieAI zombie in Zombies){
                 zombie.OnTick();
@@ -50,4 +56,13 @@ public class SceneController : MonoBehaviour {
     public static void ClearLevel() {
         // load next scene SceneManager.LoadScene();
     }
+
+    public static void EnemyMoveDone() {
+        enemiesDone += 1;
+        if (enemiesDone == enemyCount) {
+            _player.GetComponent<Player>().canAct = true;
+            enemiesDone = 0;
+        }
+    }
 }
+
