@@ -226,7 +226,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2efbffff
+      m_ExpandedIDs: 2efbffffc85f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -688,9 +688,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 864390d55a51aa8459f0924cfc28eb81, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 0bb823b7135af204e8dacd48817cf078, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 7329320359306830156, guid: 864390d55a51aa8459f0924cfc28eb81, type: 2}
+  - m_Target: {fileID: 7328847038770005822, guid: 0bb823b7135af204e8dacd48817cf078, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -771,22 +771,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Graphics
+    - Assets/Scripts/Obstacles/Enemies
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Graphics
+  - Assets/Scripts/Obstacles/Enemies
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\mcdon\Repositories\ldjam52
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 23}
-    m_SelectedIDs: c6610000
-    m_LastClickedID: 25030
-    m_ExpandedIDs: 00000000b861000000ca9a3bffffff7f
+    m_SelectedIDs: 68710000
+    m_LastClickedID: 29032
+    m_ExpandedIDs: 00000000b8610000ce6100008264000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -814,7 +814,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b8610000
+    m_ExpandedIDs: 00000000b861000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

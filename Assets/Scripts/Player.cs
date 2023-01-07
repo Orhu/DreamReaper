@@ -196,8 +196,8 @@ public class Player : MonoBehaviour {
         }
 
         Debug.Log("Player Phased");
-        CheckItem(); // check for item/goal under player
-        SceneController.Tick();
+        //CheckItem(); // check for item/goal under player
+        //SceneController.Tick();
     }
 
     public void CheckItem() { // checks for both items AND the goal
@@ -449,7 +449,6 @@ public class Player : MonoBehaviour {
                 // 3) tick scene controller, check for items
                 CheckItem();
                 SceneController.Tick();
-
                 break;
             case 2: // fail, phase through unphasable object
                 // 1) move 0.32px forward in 0.2s
