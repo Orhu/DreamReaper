@@ -18,6 +18,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     private float vertical = 0f;
 
     private bool playerCaught = false;
+    private bool checking = true;
 
     // Start is called before the first frame update
     void Start() {
@@ -47,9 +48,11 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     // Update is called once per frame
     void Update() {
         if (!playerCaught && gameObject.activeSelf && SceneController.allowKills) {
-            if (CheckForPlayer()){
-                StopAllCoroutines();
-                StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+            if (checking) {
+                if (CheckForPlayer()){
+                    StopAllCoroutines();
+                    StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+                }
             }
         }
     }
@@ -107,9 +110,9 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     private IEnumerator AnimateZombieMove(Vector3 dest) {
         // TO DO
         Vector2 start = transform.position;
-
+        
         yield return new WaitForSeconds(1f/6f); // wait for start of animation
-
+        checking = false;
         float i = 0f;
         while (i < 1f) {
             transform.position = new Vector3(Mathf.Lerp(start.x, dest.x, i), Mathf.Lerp(start.y, dest.y, i), 0f);
@@ -118,6 +121,8 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         }
 
         transform.position = new Vector3(dest.x, dest.y, 0f);
+        checking = true;
+        yield return null;
         SceneController.EnemyMoveDone();
     }
 

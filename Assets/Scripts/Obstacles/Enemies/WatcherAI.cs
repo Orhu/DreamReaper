@@ -31,6 +31,9 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     private bool blinkwait = true;
 
     public float hitboxLength;
+    private bool checking = true;
+
+    private float timeToBlink = 3f;
 
     // Start is called before the first frame update
     void Start() {
@@ -79,9 +82,11 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     void Update() {   
         AnimateIdle();
         if (!playerCaught && gameObject.activeSelf && SceneController.allowKills) {
-            if (CheckForPlayer()){
-                StopAllCoroutines();
-                StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+            if (checking) {
+                if (CheckForPlayer()){
+                    StopAllCoroutines();
+                    StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+                }
             }
         }
     }
@@ -170,7 +175,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     private IEnumerator BlinkLoop() { // blink animation
-        float timeToBlink = 3f;
+        timeToBlink = 3f;
         while (timeToBlink > 0f) {
             if (blinkwait) {
                 timeToBlink -= Time.deltaTime;
@@ -187,6 +192,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         // 1) hide light bar
         lightObject.SetActive(false);
         // 2) play animation, wait for it to finish
+        checking = false;
         _anim.SetTrigger("tick");
         switch (facing) {
             case 0: //switch to facing right
@@ -215,8 +221,10 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         yield return new WaitForSeconds(0.2f);
         // 3) reveal light bar
         lightObject.SetActive(true);
-
+        checking = true;
         // 4) send done message to SceneController
+        timeToBlink = 3f;
+        yield return null;
         SceneController.EnemyMoveDone();
     }
 
