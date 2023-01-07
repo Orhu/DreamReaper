@@ -91,7 +91,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IUpdateOnTick {
                 break;
         }
         watcherLight.transform.Rotate(Vector3.back * 90);
-        watcherLight.transform.localPosition = new Vector2(horizontal, vertical);
+        watcherLight.transform.localPosition = new Vector2(horizontal * 1.4f, vertical * 1.4f);
         hitbox.offset = new Vector2(horizontal, vertical);
     }
 
