@@ -8,20 +8,20 @@ public class Player : MonoBehaviour {
     public int item {get; private set;} = 0;
     private bool usingItem = false; // do you want to make them confirm direction? Could part of the puzzle be approaching something in the correct direction?
 
-    public int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
+    public int facing = 1; // 0 = up, 1 = right, 2 = down, 3 = left
 
     [Tooltip("Layers to check for obstacles the player can't stand on")]
     [SerializeField] LayerMask obstacleLayerMask;
-
     [Tooltip("Layers to check if you can phase through")]
     [SerializeField] LayerMask phaseLayerMask;
-
     [Tooltip("Layers to check for item usages")]
     [SerializeField] LayerMask itemLayerMask;
 
+    private Animator _anim;
+
     // Start is called before the first frame update
     void Start() {
-        
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,15 +47,20 @@ public class Player : MonoBehaviour {
             
         } else if (Input.GetKeyDown(KeyCode.UpArrow)) { // check for arrow keys to move
             moveDirection = 0;
+            facing = 0;
         } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
             moveDirection = 1;
+            facing = 1;
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
             moveDirection = 2;
+            facing = 2;
         } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             moveDirection = 3;
+            facing = 3;
         }
 
         if (moveDirection != -1) {
+            _anim.SetInteger("facing",facing);
             // case for phase, items, moving
             if (phasing) {
                 PhaseMove(moveDirection);
