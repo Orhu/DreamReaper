@@ -344,6 +344,9 @@ public class Player : MonoBehaviour {
     private IEnumerator AnimateMove(Vector2 dest, bool isFail) {
         // TO DO
         // play player move sound
+        var moveSound = Resources.Load<AudioClip>("Sounds/playerMove");
+        SceneController._audioSource.PlayOneShot(moveSound);
+
         // quick linear interpolation between current position and destination position
         canAct = false;
         Vector2 start = transform.position;
