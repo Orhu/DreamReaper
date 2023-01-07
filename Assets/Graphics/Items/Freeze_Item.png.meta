@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56020f23dc3764b4c84e99ac356b4627
+guid: 69cfad59fcc866f48a29c0845c6047a5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,91 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d86c15e65e774a4ea50c63342332658
-      internalID: 294796510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wall
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9ce61f8f03f26b4a89c35548f9d490b
-      internalID: 1046412060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floorA
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa69883af9b8b6e4b920531deb90d02d
-      internalID: -650426204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: door
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 27e42ab97275b764597f19c53d8d23b1
-      internalID: -1858399553
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floorB
+      name: hourglass0
       rect:
         serializedVersion: 2
         x: 0
@@ -208,20 +124,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 525556d6aa744af45b3faa000fe044dc
-      internalID: -1894005822
+      spriteID: 377163a45b10b9c408c7dcf0958fc45f
+      internalID: 35420651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goal
+      name: hourglass1
       rect:
         serializedVersion: 2
         x: 64
@@ -229,14 +145,35 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 438790ea0a0c9354286dce7eda35cf1c
-      internalID: 2005123475
+      spriteID: 185ddf1b86c36c94fb702f91993e48b7
+      internalID: 1028915999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hourglass2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d24a6889894ceb42b259b7bb75d0bba
+      internalID: -1381267784
       vertices: []
       indices: 
       edges: []
@@ -252,12 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      door: -1858399553
-      player: 294796510
-      floorB: -1894005822
-      wall: 1046412060
-      Goal: 2005123475
-      floorA: -650426204
+      hourglass0: 35420651
+      hourglass2: -1381267784
+      hourglass1: 1028915999
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
