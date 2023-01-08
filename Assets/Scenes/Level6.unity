@@ -862,6 +862,10 @@ PrefabInstance:
       propertyPath: facing
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 676461843035443487, guid: b0d14c6bef9e6474eb6bae6fc835e536, type: 3}
+      propertyPath: hitboxLength
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d14c6bef9e6474eb6bae6fc835e536, type: 3}
 --- !u!1 &327666237

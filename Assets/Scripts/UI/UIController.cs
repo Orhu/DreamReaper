@@ -6,7 +6,8 @@ using TMPro;
 
 public class UIController : MonoBehaviour {
     [Header("Game Overlay UI")]
-    //[SerializeField] Image[] phaseCounters;
+    [SerializeField] Sprite[] phaseCounterSprites;
+    [SerializeField] Image[] phaseCounters;
     [SerializeField] Image itemBox;
     [SerializeField] TMP_Text moveCounter;
 
@@ -108,6 +109,31 @@ public class UIController : MonoBehaviour {
     public void UpdateMovesCounter() {
         if (showMoves) {
             moveCounter.text = $"Moves: {SceneController.numMoves}";
+        }
+    }
+
+    public void UpdatePhaseCounter(int phasesLeft) {
+        switch (phasesLeft) {
+            case 0:
+                foreach(Image img in phaseCounters) {
+                    img.sprite = phaseCounterSprites[0];
+                }
+                return;
+            case 1:
+                phaseCounters[0].sprite = phaseCounterSprites[1];
+                phaseCounters[1].sprite = phaseCounterSprites[0];
+                phaseCounters[2].sprite = phaseCounterSprites[0];
+                return;
+            case 2:
+                phaseCounters[0].sprite = phaseCounterSprites[1];
+                phaseCounters[1].sprite = phaseCounterSprites[1];
+                phaseCounters[2].sprite = phaseCounterSprites[0];
+                return;
+            case 3:
+                phaseCounters[0].sprite = phaseCounterSprites[1];
+                phaseCounters[1].sprite = phaseCounterSprites[1];
+                phaseCounters[2].sprite = phaseCounterSprites[1];
+            return;
         }
     }
 

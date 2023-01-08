@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593889733147856475}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 0, z: 0}
-  m_LocalScale: {x: 1.12, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0.64, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8266942399071136323}
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.8105645, b: 0.032075405, a: 0.48235294}
+  m_Sprite: {fileID: -378535751, guid: 287796227d42dd74f95224303e2d0044, type: 3}
+  m_Color: {r: 1, g: 0.8105645, b: 0.032075405, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,7 +102,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -187,7 +187,13 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 8
-  hitboxLength: 0
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  lightShort: {fileID: -378535751, guid: 287796227d42dd74f95224303e2d0044, type: 3}
+  lightMid: {fileID: -1953835922, guid: 287796227d42dd74f95224303e2d0044, type: 3}
+  lightLong: {fileID: 289317139, guid: 287796227d42dd74f95224303e2d0044, type: 3}
+  hitboxLength: 1
 --- !u!1 &6496066474311132963
 GameObject:
   m_ObjectHideFlags: 0

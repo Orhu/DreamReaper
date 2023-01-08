@@ -13,11 +13,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423892108844157770, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.25
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423892108844157770, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3423892108844157770, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.95
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129527296310017425, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129527296310017425, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.64
       objectReference: {fileID: 0}
     - target: {fileID: 5427968822606923065, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
       propertyPath: m_Name
@@ -27,6 +39,18 @@ PrefabInstance:
       propertyPath: facing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5427968822606923066, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: lightMid
+      value: 
+      objectReference: {fileID: -1953835922, guid: 287796227d42dd74f95224303e2d0044, type: 3}
+    - target: {fileID: 5427968822606923066, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: lightLong
+      value: 
+      objectReference: {fileID: 289317139, guid: 287796227d42dd74f95224303e2d0044, type: 3}
+    - target: {fileID: 5427968822606923066, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: lightShort
+      value: 
+      objectReference: {fileID: -378535751, guid: 287796227d42dd74f95224303e2d0044, type: 3}
     - target: {fileID: 5427968822606923066, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
       propertyPath: obstacleLayerMask.m_Bits
       value: 448
@@ -83,6 +107,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7488731554822254172, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -378535751, guid: 287796227d42dd74f95224303e2d0044, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e47afcf941e9749bee9812f8d421d1, type: 3}
 --- !u!1 &5335262544114080382 stripped
