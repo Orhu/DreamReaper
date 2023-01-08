@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour {
     public static GameObject _player;
     public static UIController _ui;
     public static AudioSource _audioSource;
+    public static AudioSource _soundSource;
 
     private static int freezeTimer = 0;
 
@@ -33,6 +34,7 @@ public class SceneController : MonoBehaviour {
         _player = GameObject.Find("Player");
         _ui = GameObject.Find("UI").GetComponent<UIController>();
         _audioSource = GetComponent<AudioSource>(); // this audio source will play background music in each level
+        _soundSource = transform.GetChild(0).GetComponent<AudioSource>();
         
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
@@ -44,6 +46,7 @@ public class SceneController : MonoBehaviour {
         playerCaught = false;
 
         _audioSource.volume = SettingsManager.masterVolume * SettingsManager.musicVolume;
+        _soundSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume;
     }
 
     public static void Tick() { // each time the player takes an action
@@ -95,6 +98,10 @@ public class SceneController : MonoBehaviour {
     public static void EnemyMoveDone() {
         enemiesDone += 1;
         if (enemiesDone == enemyCount) {
+            if(enemyCount != 0) {
+                var enemyMoveSound = Resources.Load<AudioClip>("Sounds/enemyMove");
+                _soundSource.PlayOneShot(enemyMoveSound);
+            }
             _player.GetComponent<Player>().canAct = true;
             enemiesDone = 0;
             allowKills = false;
