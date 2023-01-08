@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
 
     private Animator _anim;
     private SpriteRenderer _sprite;
+    private AudioSource _audioSource;
 
     public bool canAct = true;
 
@@ -34,62 +35,68 @@ public class Player : MonoBehaviour {
         curPhases = maxPhases;
         _anim = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>(); // this audio source will play all player-related sounds
+
         _anim.SetInteger("facing", facing);
+        _audioSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume; // sets volume on attached audio source
+
         canAct = true;
     }
 
     // Update is called once per frame
     void Update() {
-        if (canAct) {
-            int moveDirection = -1; // 0 = up, 1 = right, 2 = down, 3 = left
-            if (Input.GetKeyDown(KeyCode.Z)) { // toggle phase mode
-                if(!usingItem && curPhases > 0) {
-                    phasing = !phasing;
-                    _anim.SetBool("phasing", phasing);
-                } else if (usingItem) {
-                    Debug.Log("Player cannot phase while using an item");
-                } else if (curPhases <= 0) { // no phasing at all (even if you're not phasing through anything) when out of charge
-                    Debug.Log("Player is out of phases");
-                    StartCoroutine(AnimateOutOfPhases());
-                }
-                // else play a "wrong" sound and give some kind of feedback
-            } else if (Input.GetKeyDown(KeyCode.X)) { // toggle item mode
-                if(!phasing && item != 0) {
-                    UseItem();
-                } else {
-                    if (item == 0) {
-                        Debug.Log("Player cannot use an item if they have none");
-                    } else if (phasing) {
-                        Debug.Log("Player cannot use an item while phasing");
+        if (SceneController.gameState == GameState.GAME) {
+            if (canAct) {
+                int moveDirection = -1; // 0 = up, 1 = right, 2 = down, 3 = left
+                if (Input.GetKeyDown(KeyCode.Z)) { // toggle phase mode
+                    if(!usingItem && curPhases > 0) {
+                        phasing = !phasing;
+                        _anim.SetBool("phasing", phasing);
+                    } else if (usingItem) {
+                        Debug.Log("Player cannot phase while using an item");
+                    } else if (curPhases <= 0) { // no phasing at all (even if you're not phasing through anything) when out of charge
+                        Debug.Log("Player is out of phases");
+                        StartCoroutine(AnimateOutOfPhases());
                     }
+                    // else play a "wrong" sound and give some kind of feedback
+                } else if (Input.GetKeyDown(KeyCode.X)) { // toggle item mode
+                    if(!phasing && item != 0) {
+                        UseItem();
+                    } else {
+                        if (item == 0) {
+                            Debug.Log("Player cannot use an item if they have none");
+                        } else if (phasing) {
+                            Debug.Log("Player cannot use an item while phasing");
+                        }
+                    }
+                } else if (Input.GetKeyDown(KeyCode.C)) {// wait
+                    Debug.Log("Waiting a turn");
+                    canAct = false;
+                    SceneController.Tick();
+                } else if (Input.GetKeyDown(KeyCode.UpArrow)) { // check for arrow keys to move
+                    moveDirection = 0;
+                    facing = 0;
+                } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                    moveDirection = 1;
+                    facing = 1;
+                } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+                    moveDirection = 2;
+                    facing = 2;
+                } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+                    moveDirection = 3;
+                    facing = 3;
+                } else if (Input.GetKeyDown(KeyCode.Backspace)) {
+                    // Restart Level Prompt
                 }
-            } else if (Input.GetKeyDown(KeyCode.C)) {// wait
-                Debug.Log("Waiting a turn");
-                canAct = false;
-                SceneController.Tick();
-            } else if (Input.GetKeyDown(KeyCode.UpArrow)) { // check for arrow keys to move
-                moveDirection = 0;
-                facing = 0;
-            } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                moveDirection = 1;
-                facing = 1;
-            } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                moveDirection = 2;
-                facing = 2;
-            } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                moveDirection = 3;
-                facing = 3;
-            } else if (Input.GetKeyDown(KeyCode.Backspace)) {
-                // Restart Level Prompt
-            }
 
-            if (moveDirection != -1) {
-                _anim.SetInteger("facing",facing);
-                // case for phase, items, moving
-                if (phasing) {
-                    PhaseMove(moveDirection);
-                } else {
-                    PlayerMove(moveDirection);
+                if (moveDirection != -1) {
+                    _anim.SetInteger("facing",facing);
+                    // case for phase, items, moving
+                    if (phasing) {
+                        PhaseMove(moveDirection);
+                    } else {
+                        PlayerMove(moveDirection);
+                    }
                 }
             }
         }
