@@ -86,7 +86,6 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 break;
             }
         }
-        lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
         
 
         StartCoroutine(BlinkLoop());
