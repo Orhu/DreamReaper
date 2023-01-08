@@ -7,10 +7,19 @@ public class Door : MonoBehaviour, IObstacle {
     public int type {get; [SerializeField] set;} = 1; // type key: 0 = wall, 1 = door, 2 = enemy, 3 = prop
     [SerializeField] bool blocked = false;
 
+    private Animator _anim;
+    private AudioSource _audioSource;
+
     void Start() {
         if (blocked) { // update this
             phasable = false;
         }
+        _anim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+
+        _anim.SetBool("locked", blocked);
+
+        _audioSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume;
     }
 
     public bool IsPhasable() {
@@ -28,5 +37,7 @@ public class Door : MonoBehaviour, IObstacle {
     public void Unblock() {
         blocked = false;
         phasable = true;
+        _anim.SetBool("locked", blocked);
+        _anim.SetTrigger("unlock");
     }
 }
