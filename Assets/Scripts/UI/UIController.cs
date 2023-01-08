@@ -18,6 +18,9 @@ public class UIController : MonoBehaviour {
     private int frame = 0;
 
     private int curSprite = 0;
+
+    public static bool showMoves {get; private set;} = false;
+    public static bool confirmReset {get; private set;} = true;
     
     void Start() {
         curSprite = 0;
@@ -71,8 +74,24 @@ public class UIController : MonoBehaviour {
         }
     }
 
+    public void UpdateMovesCounter() {
+        if (showMoves) {
+            //moveCounter.text = $"Moves: {SceneController.numMoves}";
+        }
+    }
+
     public void RefreshUI() {
         Player plyr = SceneController._player.GetComponent<Player>();
         ChangeItemSprite(plyr.item);
+
+        // show moves counter if turned on
+    }
+
+    public static void SetShowMoves(bool newVal) {
+        showMoves = newVal;
+    }
+
+    public static void SetConfirmReset(bool newVal) {
+        confirmReset = newVal;
     }
 }
