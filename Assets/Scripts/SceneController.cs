@@ -47,6 +47,8 @@ public class SceneController : MonoBehaviour {
 
         _audioSource.volume = SettingsManager.masterVolume * SettingsManager.musicVolume;
         _soundSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume;
+
+        _ui.UpdatePhaseCounter(_player.GetComponent<Player>().curPhases);
     }
 
     public static void Tick() { // each time the player takes an action

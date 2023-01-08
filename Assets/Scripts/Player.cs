@@ -441,6 +441,7 @@ public class Player : MonoBehaviour {
 
                 // 5) decrement curPhases, tick scene controller, check for items
                 curPhases--;
+                SceneController._ui.UpdatePhaseCounter(curPhases);
                 Debug.Log($"Phases Remaining: {curPhases}");
                 CheckItem();
                 SceneController.Tick();
