@@ -104,14 +104,21 @@ public class SceneController : MonoBehaviour {
     // GameState Stuff
     public static void OpenMenu() {
         gameState = GameState.MENU;
+        _audioSource.Pause();
     }
 
     public static void CloseMenu() {
         gameState = GameState.GAME;
         _ui.RefreshUI();
+        _audioSource.UnPause();
     }
 
-    public static void BackToMenu() {
+    public static void OpenPauseMenu() {
+        OpenMenu();
+        _ui.OpenPauseMenu();
+    }
+
+    public static void BackToTitle() {
         SceneManager.LoadScene(0);
     }
 

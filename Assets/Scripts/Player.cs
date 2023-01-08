@@ -87,7 +87,10 @@ public class Player : MonoBehaviour {
                     facing = 3;
                 } else if (Input.GetKeyDown(KeyCode.Backspace)) {
                     // Restart Level Prompt
+                } else if (Input.GetKeyDown(KeyCode.Escape)) {
+                    SceneController.OpenMenu();
                 }
+
 
                 if (moveDirection != -1) {
                     _anim.SetInteger("facing",facing);
