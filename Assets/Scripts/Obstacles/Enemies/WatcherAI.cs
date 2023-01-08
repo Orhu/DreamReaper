@@ -14,6 +14,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
 
     [SerializeField] int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
     [SerializeField] LayerMask playerMask;
+    [SerializeField] LayerMask obstacleLayerMask;
     
     private float originalY;
     private float originalYL;
@@ -130,18 +131,38 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 horizontal = -1f;
                 break;
         }
+        //Debug.Log("new move");
         for (int i = 1; i < 1 + hitboxLength; i++){
             Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
-            Collider2D col = Physics2D.OverlapPoint(coordCheck, playerMask);
-            if (col != null) {
-                playerCaught = true;
-                Debug.Log("Gotcha!");
+            Collider2D wallCheck = Physics2D.OverlapPoint(coordCheck, obstacleLayerMask);
+            if (wallCheck != null){
+                switch (i){
+                    case 1: //there is an object right in front
+                        //all light sprites should be off
+                        lightObject.SetActive(false);
+                        break;
+                    case 2:     //there is an object 1 with 1 empty space between
+                        //light 1 should be on
+                        break;
+                    case 3:     //there is an object 1 with 2 empty space between
+                        //light 2 should be on
+                        break;
+                    case 4:     //there is an object 1 with 3 empty space between
+                        //light 3 should be on
+                        break;
+                }
+                lightObject.SetActive(false);
+                break;
             }
-        }
-        Collider2D watcherCol = Physics2D.OverlapPoint(transform.position, playerMask);
-        if (watcherCol != null) {
-            playerCaught = true;
-            Debug.Log("Gotcha!");
+            else{
+                Collider2D col = Physics2D.OverlapPoint(coordCheck, playerMask);
+                if (col != null) {
+                    playerCaught = true;
+                }
+                else{           //remove this when variable sprites are added
+                    lightObject.SetActive(true);
+                }
+            }
         }
         return (playerCaught);
     }
