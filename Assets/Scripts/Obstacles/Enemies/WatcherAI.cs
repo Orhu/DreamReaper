@@ -15,6 +15,11 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     [SerializeField] int facing = 0; // 0 = up, 1 = right, 2 = down, 3 = left
     [SerializeField] LayerMask playerMask;
     [SerializeField] LayerMask obstacleLayerMask;
+
+    [SerializeField] Sprite lightShort;
+    [SerializeField] Sprite lightMid;
+    [SerializeField] Sprite lightLong;
+
     
     private float originalY;
     private float originalYL;
@@ -32,6 +37,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     private bool blinkwait = true;
 
     public float hitboxLength;
+    public float hitboxDistance;
     private bool checking = true;
 
     private float timeToBlink = 3f;
@@ -52,7 +58,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         _anim.SetInteger("facing", facing);
         _anim.SetTrigger("start");
 
-        hitboxLength = lightObject.transform.localScale.x;
+        //hitboxLength = lightObject.transform.localScale.x;
 
         switch (facing) {
             case 0:
@@ -75,7 +81,14 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 lightObject.transform.Rotate(Vector3.back * 180);
                 break;
         }
-        lightObject.transform.localPosition = new Vector3(horizontal * 0.88f, vertical * 0.88f, transform.localPosition.z);
+        for (int i = 1; i < 1 + hitboxLength; i++){
+            if(UpdateRange(i)){
+                break;
+            }
+        }
+        lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
+        
+
         StartCoroutine(BlinkLoop());
     }
 
@@ -112,6 +125,39 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         StopAllCoroutines();
     }
 
+    public bool UpdateRange(int i){
+        Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
+        Collider2D wallCheck = Physics2D.OverlapPoint(coordCheck, obstacleLayerMask);
+        Debug.Log(gameObject.name);
+        Debug.Log(i);
+        if (wallCheck != null){
+            Debug.Log("hit something");
+            switch (i){
+                case 1: //there is an object right in front
+                    lightObject.SetActive(false);
+                    break;
+                case 2:     //there is an object 1 with 1 empty space between
+                    lightBody.sprite = lightShort;
+                    hitboxDistance = .64f;
+                    lightObject.SetActive(true);
+                    break;
+                case 3:     //there is an object 1 with 2 empty space between
+                    lightBody.sprite = lightMid;
+                    hitboxDistance = .96f;
+                    lightObject.SetActive(true);
+                    break;
+                case 4:     //there is an object 1 with 3 empty space between
+                    lightBody.sprite = lightLong;
+                    hitboxDistance = 1.28f;
+                    lightObject.SetActive(true);
+                    break;
+            }
+            lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
+            return(true);
+        }
+        return(false);
+    }
+
     private bool CheckForPlayer() {
         switch (facing) {
             case 0: //switch to facing right
@@ -140,34 +186,34 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         
         //check light beam
         for (int i = 1; i < 1 + hitboxLength; i++){
-            Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
-            Collider2D wallCheck = Physics2D.OverlapPoint(coordCheck, obstacleLayerMask);
-            if (wallCheck != null){
-                switch (i){
-                    case 1: //there is an object right in front
-                        //all light sprites should be off
-                        lightObject.SetActive(false);
-                        break;
-                    case 2:     //there is an object 1 with 1 empty space between
-                        //light 1 should be on
-                        break;
-                    case 3:     //there is an object 1 with 2 empty space between
-                        //light 2 should be on
-                        break;
-                    case 4:     //there is an object 1 with 3 empty space between
-                        //light 3 should be on
-                        break;
-                }
-                lightObject.SetActive(false);
+            if(UpdateRange(i)){
                 break;
             }
             else{
+                Debug.Log("did not hit something");
+                switch (hitboxLength){
+                    case 1: //there is an object right in front
+                        //all light sprites should be off
+                        lightBody.sprite = lightShort;
+                        hitboxDistance = .64f;
+                        break;
+                    case 2:     //there is an object 1 with 1 empty space between
+                        //light 1 should be on
+                        lightBody.sprite = lightMid;
+                        hitboxDistance = .96f;
+                        break;
+                    case 3:     //there is an object 1 with 2 empty space between
+                        //light 2 should be on
+                        lightBody.sprite = lightLong;
+                        hitboxDistance = 1.28f;
+                        break;
+                }
+                lightObject.SetActive(true);
+                lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
+                Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
                 Collider2D col = Physics2D.OverlapPoint(coordCheck, playerMask);
                 if (col != null) {
                     playerCaught = true;
-                }
-                else{           //remove this when variable sprites are added
-                    lightObject.SetActive(true);
                 }
             }
         }
@@ -245,7 +291,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 break;
         }
         lightObject.transform.Rotate(Vector3.back * 90);
-        lightObject.transform.localPosition = new Vector3(horizontal * 0.88f, vertical * 0.88f, transform.localPosition.z);
+        lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
         yield return new WaitForSeconds(0.2f);
         // 3) reveal light bar
         lightObject.SetActive(true);
