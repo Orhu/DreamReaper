@@ -131,7 +131,14 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 horizontal = -1f;
                 break;
         }
-        //Debug.Log("new move");
+
+        //check if player hit watcher
+        Collider2D pl = Physics2D.OverlapPoint(transform.position, playerMask);
+        if (pl != null) {
+            playerCaught = true;
+        }
+        
+        //check light beam
         for (int i = 1; i < 1 + hitboxLength; i++){
             Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
             Collider2D wallCheck = Physics2D.OverlapPoint(coordCheck, obstacleLayerMask);
