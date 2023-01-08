@@ -273,9 +273,9 @@ MonoBehaviour:
   - {fileID: -1356327942, guid: 0adb511bc3325134596f79ec9a17f012, type: 3}
   - {fileID: -1356327942, guid: 0adb511bc3325134596f79ec9a17f012, type: 3}
   scytheAnimationFrames:
-  - {fileID: 1778124609, guid: 0adb511bc3325134596f79ec9a17f012, type: 3}
-  - {fileID: 1778124609, guid: 0adb511bc3325134596f79ec9a17f012, type: 3}
-  - {fileID: 1778124609, guid: 0adb511bc3325134596f79ec9a17f012, type: 3}
+  - {fileID: 1482733289, guid: 330cdbc4f55266c478749f4b58be3a0a, type: 3}
+  - {fileID: 1929641466, guid: 330cdbc4f55266c478749f4b58be3a0a, type: 3}
+  - {fileID: 1147695982, guid: 330cdbc4f55266c478749f4b58be3a0a, type: 3}
   hourglassAnimationFrames:
   - {fileID: 35420651, guid: 69cfad59fcc866f48a29c0845c6047a5, type: 3}
   - {fileID: 1028915999, guid: 69cfad59fcc866f48a29c0845c6047a5, type: 3}
