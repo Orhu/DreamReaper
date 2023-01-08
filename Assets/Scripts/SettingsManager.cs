@@ -6,7 +6,7 @@ public class SettingsManager : MonoBehaviour {
     // This script holds the values for different settings (mostly audio). Values can be acquired in any script.
     public static float masterVolume {get; private set;} = 0.5f;
     public static float soundsVolume {get; private set;} = 1f;
-    public static float musicVolume {get; private set;} = 0.7f;
+    public static float musicVolume {get; private set;} = 0.8f;
 
     public static void ChangeShowMoves(bool newVal) {
         UIController.SetShowMoves(newVal);
@@ -46,6 +46,8 @@ public class SettingsManager : MonoBehaviour {
             AudioSource audio = player.GetComponent<AudioSource>();
             if (audio != null) {
                 audio.volume = masterVolume * soundsVolume;
+            } else {
+                Debug.Log("couldn't find an audio source on this guy");
             }
         }
     }
