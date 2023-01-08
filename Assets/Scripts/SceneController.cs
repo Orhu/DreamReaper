@@ -72,7 +72,11 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void PlayerRestartLevel() {
-        // TO DO (What is this for?)
+        if (UIController.confirmReset) {
+            _ui.PromptResetConfirm();
+        } else {
+            RestartLevel();
+        }
     }
 
     public static void PlayerCaught() {

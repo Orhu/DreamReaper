@@ -85,10 +85,10 @@ public class Player : MonoBehaviour {
                 } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                     moveDirection = 3;
                     facing = 3;
-                } else if (Input.GetKeyDown(KeyCode.Backspace)) {
-                    // Restart Level Prompt
-                } else if (Input.GetKeyDown(KeyCode.Escape)) {
-                    SceneController.OpenMenu();
+                } else if (Input.GetKeyDown(KeyCode.Backspace)) { // restart level
+                    SceneController.PlayerRestartLevel();
+                } else if (Input.GetKeyDown(KeyCode.Escape)) { // open pause menu
+                    SceneController.OpenPauseMenu();
                 }
 
 
@@ -360,7 +360,7 @@ public class Player : MonoBehaviour {
         // TO DO
         // play player move sound
         var moveSound = Resources.Load<AudioClip>("Sounds/playerMove");
-        SceneController._audioSource.PlayOneShot(moveSound);
+        _audioSource.PlayOneShot(moveSound);
 
         // quick linear interpolation between current position and destination position
         canAct = false;

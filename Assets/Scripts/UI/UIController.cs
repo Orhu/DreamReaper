@@ -44,6 +44,7 @@ public class UIController : MonoBehaviour {
         frame = 0;
         timeRemaining = animationSpeed;
         itemBox.gameObject.SetActive(false);
+        moveCounter.gameObject.SetActive(showMoves);
 
         // Pause Menu
         controlsMenuBase.SetActive(false);
@@ -106,7 +107,7 @@ public class UIController : MonoBehaviour {
 
     public void UpdateMovesCounter() {
         if (showMoves) {
-            //moveCounter.text = $"Moves: {SceneController.numMoves}";
+            moveCounter.text = $"Moves: {SceneController.numMoves}";
         }
     }
 
@@ -115,6 +116,11 @@ public class UIController : MonoBehaviour {
         ChangeItemSprite(plyr.item);
 
         // show moves counter if turned on
+        if (showMoves && !moveCounter.gameObject.activeSelf) {
+            moveCounter.gameObject.SetActive(true);
+        } else if (!showMoves && moveCounter.gameObject.activeSelf) {
+            moveCounter.gameObject.SetActive(false);
+        }
     }
 
     public static void SetShowMoves(bool newVal) {
