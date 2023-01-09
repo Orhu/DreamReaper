@@ -109,7 +109,11 @@ public class SceneController : MonoBehaviour {
 
     public static void ClearLevel() {
         ProgressManager.ClearLevel(levelNum, numMoves);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        if (levelNum == 11) {
+            SceneManager.LoadScene(0);
+        } else {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        }
     }
 
     public static void EnemyMoveDone() {
