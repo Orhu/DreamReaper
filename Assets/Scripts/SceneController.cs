@@ -36,8 +36,6 @@ public class SceneController : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>(); // this audio source will play background music in each level
         _soundSource = transform.GetChild(0).GetComponent<AudioSource>();
         
-        Zombies = new ZombieAI[]{};
-        Watchers = new WatcherAI[]{};
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
         enemyCount = Zombies.Length + Watchers.Length;
