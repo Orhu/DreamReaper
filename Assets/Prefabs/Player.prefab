@@ -118,6 +118,8 @@ MonoBehaviour:
   doorLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  smokeParticlePrefab: {fileID: 4566142976801057681, guid: 3d79892711e89cd459f273334cbf204d, type: 3}
+  scytheParticlePrefab: {fileID: 8591455777224235886, guid: db75c7593d413df47affc8006b2e7ca3, type: 3}
   canAct: 1
 --- !u!61 &733953205750213780
 BoxCollider2D:

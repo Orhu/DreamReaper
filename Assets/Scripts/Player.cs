@@ -24,6 +24,9 @@ public class Player : MonoBehaviour {
     [Tooltip("Layers to check for doors only")]
     [SerializeField] LayerMask doorLayerMask;
 
+    [SerializeField] GameObject smokeParticlePrefab;
+    [SerializeField] GameObject scytheParticlePrefab;
+
     private Animator _anim;
     private SpriteRenderer _sprite;
     private AudioSource _audioSource;
@@ -51,6 +54,18 @@ public class Player : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Z)) { // toggle phase mode
                     if(!usingItem && curPhases > 0) {
                         phasing = !phasing;
+                        // phase sound
+                        if (phasing) {
+                            GameObject particle = Instantiate<GameObject>(smokeParticlePrefab);
+                            particle.transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
+                            particle.GetComponent<Animator>().SetBool("out", true);
+                            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerActivatePhaseMix"));
+                        } else {
+                            GameObject particle = Instantiate<GameObject>(smokeParticlePrefab);
+                            particle.transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
+                            particle.GetComponent<Animator>().SetBool("out", false);
+                            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerDeactivatePhaseMix"));
+                        }
                         _anim.SetBool("phasing", phasing);
                     } else if (usingItem) {
                         Debug.Log("Player cannot phase while using an item");
@@ -200,6 +215,7 @@ public class Player : MonoBehaviour {
             Debug.Log("Player cannot move to new position due to obstacle at destination, trying to move to next square instead");
             PlayerMove(moveDirection);
             phasing = false;
+
             _anim.SetBool("phasing", phasing);
             return;
         }
@@ -225,8 +241,10 @@ public class Player : MonoBehaviour {
             if (it != null) {
                 int hold = it.PickupItem();
                 if (hold == 4) { // if phase restore
+                    _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/eatFood"));
                     RestorePhases(1);
                 } else {
+                    _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPickupItem"));
                     item = hold;
                 }
                 Destroy(it.gameObject);
@@ -262,6 +280,7 @@ public class Player : MonoBehaviour {
         // TO DO
         // check if thing in front of player is a locked door
         Debug.Log("Use key");
+        canAct = false;
         Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
         Vector2 frontPos = new Vector2(0f,0f);
         switch (facing) {
@@ -285,11 +304,13 @@ public class Player : MonoBehaviour {
             if (hitdoor.IsBlocked()) {
                 Debug.Log("Unlocking door with key");
                 hitdoor.Unblock();
+                _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/UseKey"));
                 item = 0;
                 SceneController._ui.RefreshUI();
             }
         }
         // else, play animation
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/UseScythe"));
         //tick forward
         SceneController.Tick();
     }
@@ -299,6 +320,7 @@ public class Player : MonoBehaviour {
         // Check if thing in front of player is an enemy
         // find front
         Debug.Log("Use scythe");
+        canAct = false;
         Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
         Vector2 frontPos = new Vector2(0f,0f);
         switch (facing) {
@@ -321,8 +343,14 @@ public class Player : MonoBehaviour {
             IEnemy hitEnemy = frontCol.GetComponent<IEnemy>();
             Debug.Log("Attempting to kill enemy");
             hitEnemy.Kill();
+            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/UseScytheB"));
             item = 0;
             SceneController._ui.RefreshUI();
+        }
+        GameObject scytheParticle = Instantiate<GameObject>(scytheParticlePrefab);
+        scytheParticle.transform.position = frontPos;
+        if (frontCol == null) {
+            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/UseScythe"));
         }
         // else, play animation
         // tick forward
@@ -331,9 +359,12 @@ public class Player : MonoBehaviour {
 
     private void UseHourglass() {
         Debug.Log("Freezing Time for 3 turns");
+        canAct = false;
         item = 0;
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/UseHourglass"));
         SceneController.ActivateFreeze();
         SceneController._ui.RefreshUI();
+        SceneController.Tick();
     }
 
     private void RestorePhases(int numRest) {
@@ -345,7 +376,8 @@ public class Player : MonoBehaviour {
 
     public void KillPlayer() {
         // play death animation and reload level
-        Debug.Log("Player should die here");
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerDeathB"));
+        Debug.Log("Player dead");
     }
 
     public void ReachGoal() {
@@ -359,13 +391,13 @@ public class Player : MonoBehaviour {
     private IEnumerator AnimateMove(Vector2 dest, bool isFail) {
         // TO DO
         // play player move sound
-        var moveSound = Resources.Load<AudioClip>("Sounds/playerMove");
-        _audioSource.PlayOneShot(moveSound);
+        
 
         // quick linear interpolation between current position and destination position
         canAct = false;
         Vector2 start = transform.position;
         if (!isFail) { // successful move
+            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerMove"));
             float i = 0f;
             while (i < 1f) {
                 transform.position = new Vector3(Mathf.Lerp(start.x, dest.x, i), Mathf.Lerp(start.y, dest.y, i), 0f);
@@ -378,6 +410,7 @@ public class Player : MonoBehaviour {
             CheckItem();
             SceneController.Tick();
         } else {
+            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerMoveFail"));
             Vector2 deltaP = new Vector2((start.x - dest.x)/4f, (start.y - dest.y)/4f); // short move (16px)
             float i = 0f;
             while (i < 1f) {
@@ -412,6 +445,7 @@ public class Player : MonoBehaviour {
         Vector2 delta32 = new Vector2((dest.x - start.x)/4f, (dest.y - start.y)/4f); // 32 pixel move
         switch (phaseType) {
             case 0: // success, phase consumed
+                _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPhaseThrough")); // play phase sound
                 // 1) move 0.32px forward in 0.2s
                 i = 0f;
                 while (i < 1f) {
@@ -423,8 +457,7 @@ public class Player : MonoBehaviour {
                 // 2) wait for 0.5s
                 yield return new WaitForSeconds(0.5f); 
 
-                // 3) play phase sound and move remaining distance to destination in 0.1s
-                // play phase sound
+                // 3) move remaining distance to destination in 0.1s
                 i = 0f;
                 while (i < 1f) {
                     transform.position = new Vector3(Mathf.Lerp((start.x + delta32.x), dest.x, i), Mathf.Lerp((start.y + delta32.y), dest.y, i), 0f);
@@ -449,6 +482,7 @@ public class Player : MonoBehaviour {
                 break;
             case 1: // success, no phase consumed
                 // 1) play sound and move to destination in 0.25s
+                _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPhaseNothing"));
                 i = 0f;
                 while (i < 1f) {
                     transform.position = new Vector3(Mathf.Lerp(start.x, dest.x, i), Mathf.Lerp(start.y, dest.y, i), 0f);
@@ -467,6 +501,7 @@ public class Player : MonoBehaviour {
                 SceneController.Tick();
                 break;
             case 2: // fail, phase through unphasable object
+                
                 // 1) move 0.32px forward in 0.2s
                 i = 0f;
                 while (i < 1f) {
@@ -488,6 +523,7 @@ public class Player : MonoBehaviour {
 
                 // 4) play sound, update animator, and change sprite color to red
                 // play sound
+                _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPhaseWall"));
                 phasing = false;
                 _anim.SetBool("phasing", phasing);
                 _sprite.color = new Vector4(0.3f, 0.3f, 0.3f, 1f);
@@ -530,11 +566,13 @@ public class Player : MonoBehaviour {
 
                 // 4) play sound and shock animation for 0.6s
                 for (int j = 0; j < 3; j++) {
+                    _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPhaseDoorFail"));
                     _sprite.color = new Vector4(0f, 1f, 1f, 1f); // cyan
                     yield return new WaitForSeconds(0.1f);
                     _sprite.color = new Vector4(1f, 1f, 1f, 1f);
                     yield return new WaitForSeconds(0.1f);
                 } // 0.2s per iteration for 3 interations, total of 0.6s
+                _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerMoveFail"));
 
                 // 5) update animator, move backward to start in 0.05s
                 phasing = false;
@@ -561,7 +599,7 @@ public class Player : MonoBehaviour {
     private IEnumerator AnimateOutOfPhases() {
         // TO DO, need proper animation
         canAct = false;
-        // play sound
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerOutOfPhases"));
         for (int i = 0; i < 3; i++) {
             _sprite.color = new Vector4(1f, 0.1f, 1f, 0.5f); // magenta
             yield return new WaitForSeconds(0.1f);
@@ -569,30 +607,5 @@ public class Player : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
         }
         canAct = true;
-    }
-
-    private IEnumerator AnimateKey(bool isUsed) {
-        // TO DO
-        yield return null;
-    }
-
-    private IEnumerator AnimateScythe(bool isUsed) {
-        // TO DO
-        yield return null;
-    }
-
-    private IEnumerator AnimateHourglass() {
-        // TO DO
-        yield return null;
-    }
-
-    private IEnumerator AnimateDie() {
-        // TO DO
-        yield return null;
-    }
-
-    private IEnumerator AnimateWin() {
-        // TO DO
-        yield return null;
     }
 }
