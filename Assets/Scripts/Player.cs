@@ -100,16 +100,16 @@ public class Player : MonoBehaviour {
                     Debug.Log("Waiting a turn");
                     canAct = false;
                     SceneController.Tick();
-                } else if (Input.GetKeyDown(KeyCode.UpArrow)) { // check for arrow keys to move
+                } else if (Input.GetKey(KeyCode.UpArrow)) { // check for arrow keys to move
                     moveDirection = 0;
                     facing = 0;
-                } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                } else if (Input.GetKey(KeyCode.RightArrow)) {
                     moveDirection = 1;
                     facing = 1;
-                } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+                } else if (Input.GetKey(KeyCode.DownArrow)) {
                     moveDirection = 2;
                     facing = 2;
-                } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+                } else if (Input.GetKey(KeyCode.LeftArrow)) {
                     moveDirection = 3;
                     facing = 3;
                 }
@@ -397,6 +397,15 @@ public class Player : MonoBehaviour {
         Debug.Log("Player has reached goal");
     }
 
+    public void callMinWait(){
+        StartCoroutine(waitMinimumSeconds());
+    }
+
+    //dont let player move to quick
+    public IEnumerator waitMinimumSeconds(){
+        yield return new WaitForSeconds(.25f);
+        canAct = true;
+    }
 
     // code-based animation coroutines (this could also just be one large function but breaking it up is much nicer, just be sure to avoid redundancy)
     private IEnumerator AnimateMove(Vector2 dest, bool isFail) {

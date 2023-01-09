@@ -69,9 +69,12 @@ public class SceneController : MonoBehaviour {
         if (playerCaught) {
             return;
         }
-        if (freezeTimer > 0 || enemyCount == 0) {
+        if (enemyCount == 0){
+            _player.GetComponent<Player>().callMinWait();
+        }
+        else if (freezeTimer > 0) {
             freezeTimer--;
-            _player.GetComponent<Player>().canAct = true;
+            _player.GetComponent<Player>().callMinWait();
         } else {
             foreach (ZombieAI zombie in Zombies){
                 //zombie.OnTick();

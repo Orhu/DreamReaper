@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour {
     [SerializeField] float animationSpeed = 0.5f; // time for each frame
 
     [Header("Pause Menu")]
+    [SerializeField] GameObject LevelTextObject;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject pauseMenuBase;
     [SerializeField] GameObject optionsMenuBase;
@@ -46,6 +47,7 @@ public class UIController : MonoBehaviour {
         curSprite = 0;
         frame = 0;
         timeRemaining = animationSpeed;
+        LevelTextObject.GetComponent<TMP_Text>().text = "Level " + (SceneController.levelNum + 1).ToString();
         itemBox.gameObject.SetActive(false);
         moveCounter.gameObject.SetActive(showMoves);
 
