@@ -33,6 +33,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     private SpriteRenderer lightBody;
 
     private Animator _anim;
+    private AudioSource _audioSource;
 
     private bool blinkwait = true;
 
@@ -57,6 +58,9 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         _anim = this.transform.GetChild(0).GetComponent<Animator>();
         _anim.SetInteger("facing", facing);
         _anim.SetTrigger("start");
+        _audioSource = GetComponent<AudioSource>();
+
+        playerCaught = false;
 
         //hitboxLength = lightObject.transform.localScale.x;
 
@@ -120,7 +124,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
 
     public void Kill() {
         gameObject.SetActive(false);
-        SceneController.DecreaseEnemyCount();
+        SceneController.DecreaseEnemyCount(1);
         StopAllCoroutines();
     }
 
@@ -180,6 +184,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         //check if player hit watcher
         Collider2D pl = Physics2D.OverlapPoint(transform.position, playerMask);
         if (pl != null) {
+            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/watcherDeath"));
             playerCaught = true;
         }
         
@@ -212,6 +217,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
                 Collider2D col = Physics2D.OverlapPoint(coordCheck, playerMask);
                 if (col != null) {
+                    _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/watcherBeamDeath"));
                     playerCaught = true;
                 }
             }
@@ -303,7 +309,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
 
     private IEnumerator DeathOfPlayer(){
         SceneController.PlayerCaught();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         SceneController.RestartLevel();
     }
 }

@@ -13,6 +13,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     private BoxCollider2D _box;
     private Animator _anim;
+    private AudioSource _audioSource;
 
     private float horizontal = 0f;
     private float vertical = 0f;
@@ -24,7 +25,9 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     void Start() {
         _box = GetComponent<BoxCollider2D>();
         _anim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         _anim.SetInteger("facing", facing);
+        playerCaught = false;
         switch (facing) {
             case 0:
                 vertical = 1f;
@@ -47,6 +50,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
 
     // Update is called once per frame
     void Update() {
+        Debug.Log($"Zombie: playerCaught = {playerCaught}, active = {gameObject.activeSelf}, allowKills = {SceneController.allowKills}");
         if (!playerCaught && gameObject.activeSelf && SceneController.allowKills) {
             if (checking) {
                 if (CheckForPlayer()){
@@ -67,6 +71,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         Collider2D col = Physics2D.OverlapPoint(transform.position, playerMask);
         if (col != null) {
             playerCaught = true;
+            _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/zombieDeath"));
             Debug.Log("Gotcha!");
         }
         return (col != null);
@@ -101,8 +106,9 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     public void Kill() {
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/zombieKill"));
         gameObject.SetActive(false);
-        SceneController.DecreaseEnemyCount();
+        SceneController.DecreaseEnemyCount(0);
         StopAllCoroutines();
     }
 

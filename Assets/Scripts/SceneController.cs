@@ -40,15 +40,17 @@ public class SceneController : MonoBehaviour {
         Watchers = FindObjectsOfType<WatcherAI>();
         enemyCount = Zombies.Length + Watchers.Length;
 
+        levelNum = SceneManager.GetActiveScene().buildIndex-2;
         numMoves = 0;
         freezeTimer = 0;
         gameState = GameState.GAME;
         playerCaught = false;
+        allowKills = false;
 
         _audioSource.volume = SettingsManager.masterVolume * SettingsManager.musicVolume;
         _soundSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume;
 
-        _ui.UpdatePhaseCounter(_player.GetComponent<Player>().curPhases);
+        _ui.UpdatePhaseCounter(_player.GetComponent<Player>().maxPhases);
     }
 
     public static void Tick() { // each time the player takes an action
@@ -73,7 +75,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void ActivateFreeze() {
-        freezeTimer = 3;
+        freezeTimer = 4;
     }
 
     public static void PlayerRestartLevel() {
@@ -86,10 +88,12 @@ public class SceneController : MonoBehaviour {
 
     public static void PlayerCaught() {
         playerCaught = true;
+        allowKills = false;
+        _player.GetComponent<Player>().KillPlayer();
     }
 
     public static void RestartLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public static void ClearLevel() {
@@ -110,8 +114,16 @@ public class SceneController : MonoBehaviour {
         }
     }
 
-    public static void DecreaseEnemyCount() {
+    public static void DecreaseEnemyCount(int enemyType) { // 0 = zombo, 1 = watcher
         enemyCount--;
+        switch (enemyType) {
+            case 0:
+                _soundSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/zombieKill"));
+                break;
+            case 1:
+                _soundSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/watcherKill"));
+                break;
+        }
     }
 
     // GameState Stuff
