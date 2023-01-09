@@ -102,7 +102,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
             if (checking) {
                 if (CheckForPlayer()){
                     StopAllCoroutines();
-                    StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+                    SceneController.PlayerCaught(); // Calls function that waits two seconds then resets the level
                 }
             }
         }
@@ -305,12 +305,6 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         timeToBlink = 3f;
         yield return null;
         SceneController.EnemyMoveDone();
-    }
-
-    private IEnumerator DeathOfPlayer(){
-        SceneController.PlayerCaught();
-        yield return new WaitForSeconds(1.5f);
-        SceneController.RestartLevel();
     }
 }
 

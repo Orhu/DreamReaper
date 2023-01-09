@@ -259,7 +259,6 @@ public class Player : MonoBehaviour {
     public void UseItem() {
         // TO DO
         Debug.Log("Player should use item here");
-
         switch (item) {
             case 1: // key
                 UseKey();
@@ -281,6 +280,7 @@ public class Player : MonoBehaviour {
         // check if thing in front of player is a locked door
         Debug.Log("Use key");
         canAct = false;
+        _anim.SetTrigger("useItem");
         Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
         Vector2 frontPos = new Vector2(0f,0f);
         switch (facing) {
@@ -321,6 +321,7 @@ public class Player : MonoBehaviour {
         // find front
         Debug.Log("Use scythe");
         canAct = false;
+        _anim.SetTrigger("useItem");
         Vector2 curPos = new Vector2(transform.position.x, transform.position.y);
         Vector2 frontPos = new Vector2(0f,0f);
         switch (facing) {
@@ -360,6 +361,7 @@ public class Player : MonoBehaviour {
     private void UseHourglass() {
         Debug.Log("Freezing Time for 3 turns");
         canAct = false;
+        _anim.SetTrigger("useItem");
         item = 0;
         _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/UseHourglass"));
         SceneController.ActivateFreeze();
@@ -376,6 +378,7 @@ public class Player : MonoBehaviour {
 
     public void KillPlayer() {
         // play death animation and reload level
+        _anim.SetTrigger("death");
         _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerDeathB"));
         Debug.Log("Player dead");
     }
@@ -607,5 +610,10 @@ public class Player : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
         }
         canAct = true;
+    }
+
+    public void FinishDeathAnim() {
+        gameObject.SetActive(false);
+        SceneController.RestartLevel();
     }
 }

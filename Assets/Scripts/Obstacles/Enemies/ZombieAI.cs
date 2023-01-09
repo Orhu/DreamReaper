@@ -55,7 +55,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
             if (checking) {
                 if (CheckForPlayer()){
                     StopAllCoroutines();
-                    StartCoroutine(DeathOfPlayer()); // Calls function that waits two seconds then resets the level
+                    SceneController.PlayerCaught(); // Calls function that waits two seconds then resets the level
                 }
             }
         }
@@ -130,11 +130,5 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         checking = true;
         yield return null;
         SceneController.EnemyMoveDone();
-    }
-
-    private IEnumerator DeathOfPlayer(){
-        SceneController.PlayerCaught();
-        yield return new WaitForSeconds(1f);
-        SceneController.RestartLevel();
     }
 }
