@@ -109,6 +109,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/zombieKill"));
         gameObject.SetActive(false);
         SceneController.DecreaseEnemyCount(0);
+        SceneController.getObjectName(gameObject, 0);
         StopAllCoroutines();
     }
 

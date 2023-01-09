@@ -88,6 +88,31 @@ public class SceneController : MonoBehaviour {
         freezeTimer = 4;
     }
 
+    public static void getObjectName(GameObject gm, int enemyType){
+        Debug.Log(gm.name);
+        switch (enemyType) {
+            case 0:
+                foreach (ZombieAI zombie in Zombies){
+                    if (zombie.name == gm.name){
+                        Destroy(zombie.gameObject);
+                        Zombies = FindObjectsOfType<ZombieAI>();
+                        enemyCount = Watchers.Length + Zombies.Length;
+                    }
+                }
+                break;
+            case 1:
+                foreach (WatcherAI watcher in Watchers){
+                    if (watcher.name == gm.name){
+                        Destroy(watcher.gameObject);
+                        Watchers = FindObjectsOfType<WatcherAI>();
+                        enemyCount = Watchers.Length + Zombies.Length;
+                    }
+                }
+                break;
+        }
+
+    }
+
     public static void PlayerRestartLevel() {
         gameState = GameState.MENU;
         if (UIController.confirmReset) {
@@ -130,7 +155,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void DecreaseEnemyCount(int enemyType) { // 0 = zombo, 1 = watcher
-        enemyCount--;
+        //enemyCount--;
         switch (enemyType) {
             case 0:
                 _soundSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/zombieKill"));
