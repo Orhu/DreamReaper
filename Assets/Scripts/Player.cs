@@ -243,7 +243,7 @@ public class Player : MonoBehaviour {
         Collider2D itemCol = Physics2D.OverlapPoint(transform.position, itemLayerMask);
         if (itemCol != null) {
             if (itemCol.gameObject.name == "Goal") {
-                ReachGoal();
+                StartCoroutine(ReachGoal());
             }
             Item it = itemCol.GetComponent<Item>();
             if (it != null) {
@@ -391,8 +391,10 @@ public class Player : MonoBehaviour {
         Debug.Log("Player dead");
     }
 
-    public void ReachGoal() {
+    public IEnumerator ReachGoal() {
         // play win animation and show level clear screen
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPickupItem"));
+        yield return new WaitForSeconds(1f);
         SceneController.ClearLevel();
         Debug.Log("Player has reached goal");
     }
