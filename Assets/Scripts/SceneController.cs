@@ -39,6 +39,7 @@ public class SceneController : MonoBehaviour {
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
         enemyCount = Zombies.Length + Watchers.Length;
+        enemiesDone = 0;
 
         levelNum = SceneManager.GetActiveScene().buildIndex-2;
         numMoves = 0;

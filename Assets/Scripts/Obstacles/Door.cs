@@ -8,18 +8,14 @@ public class Door : MonoBehaviour, IObstacle {
     [SerializeField] bool blocked = false;
 
     private Animator _anim;
-    private AudioSource _audioSource;
 
     void Start() {
         if (blocked) { // update this
             phasable = false;
         }
         _anim = GetComponent<Animator>();
-        _audioSource = GetComponent<AudioSource>();
 
         _anim.SetBool("locked", blocked);
-
-        _audioSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume;
     }
 
     public bool IsPhasable() {
