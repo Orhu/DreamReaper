@@ -49,6 +49,11 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (SceneController.gameState == GameState.GAME) {
+            if (Input.GetKeyDown(KeyCode.Escape)) { // open pause menu
+                SceneController.OpenPauseMenu();
+            } else if (Input.GetKeyDown(KeyCode.Backspace)) { // restart level
+                SceneController.PlayerRestartLevel();
+            }
             if (canAct) {
                 int moveDirection = -1; // 0 = up, 1 = right, 2 = down, 3 = left
                 if (Input.GetKeyDown(KeyCode.Z)) { // toggle phase mode
@@ -100,10 +105,6 @@ public class Player : MonoBehaviour {
                 } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                     moveDirection = 3;
                     facing = 3;
-                } else if (Input.GetKeyDown(KeyCode.Backspace)) { // restart level
-                    SceneController.PlayerRestartLevel();
-                } else if (Input.GetKeyDown(KeyCode.Escape)) { // open pause menu
-                    SceneController.OpenPauseMenu();
                 }
 
 
