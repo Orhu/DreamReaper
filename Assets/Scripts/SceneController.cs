@@ -36,6 +36,8 @@ public class SceneController : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>(); // this audio source will play background music in each level
         _soundSource = transform.GetChild(0).GetComponent<AudioSource>();
         
+        Zombies = new ZombieAI[]{};
+        Watchers = new WatcherAI[]{};
         Zombies = FindObjectsOfType<ZombieAI>();
         Watchers = FindObjectsOfType<WatcherAI>();
         enemyCount = Zombies.Length + Watchers.Length;
@@ -51,6 +53,14 @@ public class SceneController : MonoBehaviour {
         _soundSource.volume = SettingsManager.masterVolume * SettingsManager.soundsVolume;
 
         _ui.UpdatePhaseCounter(_player.GetComponent<Player>().maxPhases);
+    }
+
+    void Update() {
+        /*if (gameState == GameState.MENU) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                _ui.GoBack();
+            }
+        }*/
     }
 
     public static void Tick() { // each time the player takes an action
@@ -79,6 +89,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public static void PlayerRestartLevel() {
+        gameState = GameState.MENU;
         if (UIController.confirmReset) {
             _ui.PromptResetConfirm();
         } else {

@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour {
     [SerializeField] GameObject resetConfirmBase;
     [SerializeField] GameObject titleConfirmBase;
 
-    private bool gamePaused = false;
+    public bool gamePaused {get; private set;} = false;
 
     private float timeRemaining;
     private int frame = 0;
@@ -165,10 +165,10 @@ public class UIController : MonoBehaviour {
         pauseMenuBase.SetActive(true);
     }
     public void ClosePauseMenu() { // resume button
-        gamePaused = false;
         pausePanel.SetActive(false);
         pauseMenuBase.SetActive(false);
         SceneController.CloseMenu();
+        gamePaused = false;
     }
 
     public void OpenOptionsMenu() { // options button
@@ -233,5 +233,29 @@ public class UIController : MonoBehaviour {
         warningPanel.SetActive(false);
         pausePanel.SetActive(true);
         pauseMenuBase.SetActive(true);
+    }
+
+    public void GoBack() {
+        Debug.Log("going back");
+        if (resetConfirmBase.activeSelf) {
+            Debug.Log("going back on reset screen");
+            CancelReset();
+        }
+        if (titleConfirmBase.activeSelf) {
+            Debug.Log("going back on return to title screen");
+            CancelReturnToTitle();
+        }
+        if (pauseMenuBase.activeSelf) {
+            Debug.Log("going back on base pause screen");
+            ClosePauseMenu();
+        }
+        if (optionsMenuBase.activeSelf) {
+            Debug.Log("going back on options screen");
+            CloseOptionsMenu();
+        }
+        if (controlsMenuBase.activeSelf) {
+            Debug.Log("going back on controls screen");
+            CloseControlsMenu();
+        }
     }
 }

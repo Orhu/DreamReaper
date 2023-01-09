@@ -48,10 +48,17 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (SceneController.gameState == GameState.GAME) {
-            if (Input.GetKeyDown(KeyCode.Escape)) { // open pause menu
+        if (Input.GetKeyDown(KeyCode.Escape)) { // open pause menu
+            if (SceneController.gameState == GameState.MENU) {
+                SceneController._ui.GoBack();
+                Debug.Log("back");
+            } else if (SceneController.gameState == GameState.GAME) {
                 SceneController.OpenPauseMenu();
-            } else if (Input.GetKeyDown(KeyCode.Backspace)) { // restart level
+                Debug.Log("open menu");
+            } 
+        }
+        if (SceneController.gameState == GameState.GAME) {
+            if (Input.GetKeyDown(KeyCode.Backspace)) { // restart level
                 SceneController.PlayerRestartLevel();
             }
             if (canAct) {
