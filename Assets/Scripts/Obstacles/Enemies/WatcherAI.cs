@@ -89,6 +89,28 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
             if(UpdateRange(i)){
                 break;
             }
+            else{
+                Debug.Log("did not hit something");
+                switch (hitboxLength){
+                    case 1: //there is an object right in front
+                        //all light sprites should be off
+                        lightBody.sprite = lightShort;
+                        hitboxDistance = .64f;
+                        break;
+                    case 2:     //there is an object 1 with 1 empty space between
+                        //light 1 should be on
+                        lightBody.sprite = lightMid;
+                        hitboxDistance = .96f;
+                        break;
+                    case 3:     //there is an object 1 with 2 empty space between
+                        //light 2 should be on
+                        lightBody.sprite = lightLong;
+                        hitboxDistance = 1.28f;
+                        break;
+                }
+                lightObject.SetActive(true);
+                lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
+            }
         }
         
 
