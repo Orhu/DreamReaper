@@ -147,6 +147,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     public void Kill() {
         gameObject.SetActive(false);
         SceneController.DecreaseEnemyCount(1);
+        SceneController.getObjectName(gameObject, 1);
         StopAllCoroutines();
     }
 
