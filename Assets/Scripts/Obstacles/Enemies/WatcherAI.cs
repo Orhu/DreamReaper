@@ -90,7 +90,6 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 break;
             }
             else{
-                Debug.Log("did not hit something");
                 switch (hitboxLength){
                     case 1: //there is an object right in front
                         //all light sprites should be off
@@ -131,8 +130,21 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     public void OnTick() {
-        if (gameObject.activeSelf) {
-            StartCoroutine(AnimateWatcherMove());
+        bool caught = false;
+        if (!playerCaught && gameObject.activeSelf && SceneController.allowKills) {
+            if (checking) {
+                if (CheckForPlayer()){
+                    caught = true;
+                    StopAllCoroutines();
+                    SceneController.PlayerCaught(); // Calls function that waits two seconds then resets the level
+                }
+            }
+        }
+        
+        if (caught == false){
+            if (gameObject.activeSelf) {
+                StartCoroutine(AnimateWatcherMove());
+            }
         }
         
     }
@@ -154,10 +166,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     public bool UpdateRange(int i){
         Vector2 coordCheck = new Vector2(transform.position.x + horizontal * i * .64f, transform.position.y + vertical * i * .64f);
         Collider2D wallCheck = Physics2D.OverlapPoint(coordCheck, obstacleLayerMask);
-        Debug.Log(gameObject.name);
-        Debug.Log(i);
         if (wallCheck != null){
-            Debug.Log("hit something");
             switch (i){
                 case 1: //there is an object right in front
                     lightObject.SetActive(false);
@@ -217,7 +226,6 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
                 break;
             }
             else{
-                Debug.Log("did not hit something");
                 switch (hitboxLength){
                     case 1: //there is an object right in front
                         //all light sprites should be off

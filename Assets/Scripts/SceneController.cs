@@ -73,10 +73,16 @@ public class SceneController : MonoBehaviour {
             _player.GetComponent<Player>().canAct = true;
         } else {
             foreach (ZombieAI zombie in Zombies){
-                zombie.OnTick();
+                //zombie.OnTick();
+                if (GameObject.Find(zombie.name) != null){ // Makes sure to skip tick for entry if it was killed by scythe
+                    zombie.OnTick();
+                }
             }
             foreach (WatcherAI watcher in Watchers){
-                watcher.OnTick();
+                //watcher.OnTick();
+                if (GameObject.Find(watcher.name) != null){ // Makes sure to skip tick for entry if it was killed by scythe
+                    watcher.OnTick();
+                }
             }
             // call OnTick() on every game object in the scene
         }
