@@ -36,14 +36,23 @@ public class TitleScreenController : MonoBehaviour
     {
         levels = new GameObject[]{level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11, level12};
         levelSelect.SetActive(false);
+        startButton.SetActive(true);
+        levelSelectButton.SetActive(true);
     }
 
     public void startGame(){
         SceneManager.LoadScene("Level1");
     }
 
+    public void openStart(){
+        startButton.SetActive(true);
+        levelSelectButton.SetActive(true);
+        levelSelect.SetActive(false);
+    }
+
     public void LevelSelectOpen(){
-        startScreen.SetActive(false);
+        startButton.SetActive(false);
+        levelSelectButton.SetActive(false);
         levelSelect.SetActive(true);
         foreach (int i in Enumerable.Range(0, 12)){
             if (!ProgressManager.unlockedLevels[i]){
