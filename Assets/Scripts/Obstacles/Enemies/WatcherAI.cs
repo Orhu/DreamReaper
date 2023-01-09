@@ -330,7 +330,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         lightObject.transform.localPosition = new Vector3(horizontal * hitboxDistance, vertical * hitboxDistance, transform.localPosition.z);
         yield return new WaitForSeconds(0.2f);
         // 3) reveal light bar
-        lightObject.SetActive(true);
+        //lightObject.SetActive(true);
         checking = true;
         // 4) send done message to SceneController
         timeToBlink = 3f;
