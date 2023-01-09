@@ -394,7 +394,9 @@ public class Player : MonoBehaviour {
     public IEnumerator ReachGoal() {
         // play win animation and show level clear screen
         _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/playerPickupItem"));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
+        _audioSource.PlayOneShot(Resources.Load<AudioClip>("Sounds/reaperLaugh"));
+        yield return new WaitForSeconds(1.7f);
         SceneController.ClearLevel();
         Debug.Log("Player has reached goal");
     }
