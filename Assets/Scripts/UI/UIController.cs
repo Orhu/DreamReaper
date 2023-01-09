@@ -30,7 +30,9 @@ public class UIController : MonoBehaviour {
     [SerializeField] GameObject resetConfirmBase;
     [SerializeField] GameObject titleConfirmBase;
 
-    private bool gamePaused = false;
+    [SerializeField] GameObject pauseButton;
+
+    public bool gamePaused {get; private set;} = false;
 
     private float timeRemaining;
     private int frame = 0;
@@ -57,6 +59,8 @@ public class UIController : MonoBehaviour {
         resetConfirmBase.SetActive(false);
         titleConfirmBase.SetActive(false);
         warningPanel.SetActive(false);
+
+        pauseButton.SetActive(true);
 
         gamePaused = false;
     }
@@ -165,10 +169,10 @@ public class UIController : MonoBehaviour {
         pauseMenuBase.SetActive(true);
     }
     public void ClosePauseMenu() { // resume button
-        gamePaused = false;
         pausePanel.SetActive(false);
         pauseMenuBase.SetActive(false);
         SceneController.CloseMenu();
+        gamePaused = false;
     }
 
     public void OpenOptionsMenu() { // options button
@@ -192,6 +196,7 @@ public class UIController : MonoBehaviour {
     // Warnings
     public void PromptResetConfirm() { // also on reset button press
         // opened menu in scene controller if we needed to
+        pauseButton.SetActive(false);
         if (gamePaused) {
             pausePanel.SetActive(false);
             pauseMenuBase.SetActive(false);
@@ -208,6 +213,7 @@ public class UIController : MonoBehaviour {
     public void CancelReset() {
         warningPanel.SetActive(false);
         resetConfirmBase.SetActive(false);
+        pauseButton.SetActive(true);
         if (gamePaused) {
             pausePanel.SetActive(true);
             pauseMenuBase.SetActive(true);
@@ -216,7 +222,8 @@ public class UIController : MonoBehaviour {
         }
     }
 
-    public void PromptTitleConfirm() { // back to title button
+    public void PromptTitleConfirm() { // back to title button\
+        pauseButton.SetActive(false);
         pauseMenuBase.SetActive(false);
         warningPanel.SetActive(true);
         titleConfirmBase.SetActive(true);
@@ -231,7 +238,40 @@ public class UIController : MonoBehaviour {
     public void CancelReturnToTitle() {
         titleConfirmBase.SetActive(false);
         warningPanel.SetActive(false);
+        pauseButton.SetActive(true);
         pausePanel.SetActive(true);
         pauseMenuBase.SetActive(true);
+    }
+
+    public void GoBack() {
+        Debug.Log("going back");
+        if (resetConfirmBase.activeSelf) {
+            Debug.Log("going back on reset screen");
+            CancelReset();
+        }
+        if (titleConfirmBase.activeSelf) {
+            Debug.Log("going back on return to title screen");
+            CancelReturnToTitle();
+        }
+        if (pauseMenuBase.activeSelf) {
+            Debug.Log("going back on base pause screen");
+            ClosePauseMenu();
+        }
+        if (optionsMenuBase.activeSelf) {
+            Debug.Log("going back on options screen");
+            CloseOptionsMenu();
+        }
+        if (controlsMenuBase.activeSelf) {
+            Debug.Log("going back on controls screen");
+            CloseControlsMenu();
+        }
+    }
+
+    public void PauseButton() {
+        if (gamePaused) {
+            ClosePauseMenu();
+        } else {
+            SceneController.OpenPauseMenu();
+        }
     }
 }
