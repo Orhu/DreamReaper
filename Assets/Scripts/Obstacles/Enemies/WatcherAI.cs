@@ -60,7 +60,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         _anim.SetInteger("facing", facing);
         _anim.SetTrigger("start");
         _audioSource = GetComponent<AudioSource>();
-        _sprite = GetComponent<SpriteRenderer>();
+        _sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         playerCaught = false;
 
