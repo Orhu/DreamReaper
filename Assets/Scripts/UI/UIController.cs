@@ -111,9 +111,7 @@ public class UIController : MonoBehaviour {
     }
 
     public void UpdateMovesCounter() {
-        if (showMoves) {
-            moveCounter.text = $"Moves: {SceneController.numMoves}";
-        }
+        moveCounter.text = $"Moves: {SceneController.numMoves}";
     }
 
     public void UpdatePhaseCounter(int phasesLeft) {
