@@ -131,8 +131,21 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
     }
 
     public void OnTick() {
-        if (gameObject.activeSelf) {
-            StartCoroutine(AnimateWatcherMove());
+        bool caught = false;
+        if (!playerCaught && gameObject.activeSelf && SceneController.allowKills) {
+            if (checking) {
+                if (CheckForPlayer()){
+                    caught = true;
+                    StopAllCoroutines();
+                    SceneController.PlayerCaught(); // Calls function that waits two seconds then resets the level
+                }
+            }
+        }
+        
+        if (caught == false){
+            if (gameObject.activeSelf) {
+                StartCoroutine(AnimateWatcherMove());
+            }
         }
         
     }
