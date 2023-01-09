@@ -73,6 +73,9 @@ public class SceneController : MonoBehaviour {
             _player.GetComponent<Player>().callMinWait();
         }
         else if (freezeTimer > 0) {
+            if (freezeTimer == 1) {
+                DeactivateFreeze();
+            }
             freezeTimer--;
             _player.GetComponent<Player>().callMinWait();
         } else {
@@ -94,6 +97,20 @@ public class SceneController : MonoBehaviour {
 
     public static void ActivateFreeze() {
         freezeTimer = 4;
+        foreach (ZombieAI zombie in Zombies) {
+            zombie.Freeze(true);
+        }
+        foreach(WatcherAI watcher in Watchers) {
+            watcher.Freeze(true);
+        }
+    }
+    public static void DeactivateFreeze() {
+        foreach (ZombieAI zombie in Zombies) {
+            zombie.Freeze(false);
+        }
+        foreach(WatcherAI watcher in Watchers) {
+            watcher.Freeze(false);
+        }
     }
 
     public static void getObjectName(GameObject gm, int enemyType){

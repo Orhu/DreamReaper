@@ -34,6 +34,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
 
     private Animator _anim;
     private AudioSource _audioSource;
+    private SpriteRenderer _sprite;
 
     private bool blinkwait = true;
 
@@ -59,6 +60,7 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         _anim.SetInteger("facing", facing);
         _anim.SetTrigger("start");
         _audioSource = GetComponent<AudioSource>();
+        _sprite = GetComponent<SpriteRenderer>();
 
         playerCaught = false;
 
@@ -336,6 +338,14 @@ public class WatcherAI : MonoBehaviour, IObstacle, IEnemy {
         timeToBlink = 3f;
         yield return null;
         SceneController.EnemyMoveDone();
+    }
+
+    public void Freeze(bool activate) {
+        if (activate) {
+            _sprite.color = new Vector4(0f, 0.5f, 1f, 1f);
+        } else {
+            _sprite.color = new Vector4(1f, 1f, 1f, 1f);
+        }
     }
 }
 

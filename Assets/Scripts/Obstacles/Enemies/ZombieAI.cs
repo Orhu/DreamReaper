@@ -14,6 +14,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
     private BoxCollider2D _box;
     private Animator _anim;
     private AudioSource _audioSource;
+    private SpriteRenderer _sprite;
 
     private float horizontal = 0f;
     private float vertical = 0f;
@@ -26,6 +27,7 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         _box = GetComponent<BoxCollider2D>();
         _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _sprite = GetComponent<SpriteRenderer>();
         _anim.SetInteger("facing", facing);
         playerCaught = false;
         switch (facing) {
@@ -131,5 +133,13 @@ public class ZombieAI : MonoBehaviour, IObstacle, IEnemy {
         checking = true;
         yield return null;
         SceneController.EnemyMoveDone();
+    }
+
+    public void Freeze(bool activate) {
+        if (activate) {
+            _sprite.color = new Vector4(0f, 0.5f, 1f, 1f);
+        } else {
+            _sprite.color = new Vector4(1f, 1f, 1f, 1f);
+        }
     }
 }
