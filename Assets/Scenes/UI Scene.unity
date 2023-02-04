@@ -8390,6 +8390,7 @@ GameObject:
   - component: {fileID: 2868735437283079390}
   - component: {fileID: 2868735437283079386}
   - component: {fileID: 2868735437283079392}
+  - component: {fileID: 2868735437283079393}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -8539,6 +8540,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091402157f0be314a8d3834670318a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2868735437283079393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868735437283079377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a1821fea0d1404ab6bc8ade346fb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmResetToggle: {fileID: 104045290}
+  moveCounterToggle: {fileID: 1306336961}
+  masterVolumeSlide: {fileID: 1316885149}
+  soundVolumeSlide: {fileID: 1346125433}
+  musicVolumeSlide: {fileID: 1439726839}
 --- !u!1 &2868735437943292712
 GameObject:
   m_ObjectHideFlags: 0
